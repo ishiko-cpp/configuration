@@ -21,10 +21,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{439BA08F-2D79-506E-AABE-7F63DF232683}</ProjectGuid>
+    <ProjectGuid>{550BDC76-E372-507E-9C4B-C191618B00E4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Configuration</RootNamespace>
-    <ProjectName>Configuration</ProjectName>
+    <RootNamespace>IshikoConfiguration</RootNamespace>
+    <ProjectName>IshikoConfiguration</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

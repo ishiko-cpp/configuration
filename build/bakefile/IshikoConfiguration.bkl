@@ -5,7 +5,7 @@ vs2017.solutionfile = ../vc15/IshikoConfiguration.sln;
 vs2015.solutionfile = ../vc14/IshikoConfiguration.sln;
 vs2013.solutionfile = ../vc12/IshikoConfiguration.sln;
 
-library Configuration
+library IshikoConfiguration
 {
     archs = x86 x86_64;
 
