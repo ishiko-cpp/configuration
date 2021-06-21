@@ -1,6 +1,6 @@
 toolsets = gnu vs2017 vs2015 vs2013;
 
-gnu.makefile = ../GNUmake/GNUmakefile;
+gnu.makefile = ../gnumake/GNUmakefile;
 vs2017.solutionfile = ../vc15/IshikoConfiguration.sln;
 vs2015.solutionfile = ../vc14/IshikoConfiguration.sln;
 vs2013.solutionfile = ../vc12/IshikoConfiguration.sln;
