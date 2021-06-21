@@ -1,3 +1,4 @@
+import ../../../include/Ishiko/Configuration.bkl;
 ishikopath = envvar("ISHIKO_CPP");
 import $(ishikopath)/test/include/Ishiko/TestFramework/TestFrameworkCore.bkl;
 
@@ -8,7 +9,7 @@ vs2017.solutionfile = ../vc15/IshikoConfigurationTests.sln;
 vs2015.solutionfile = ../vc14/IshikoConfigurationTests.sln;
 vs2013.solutionfile = ../vc12/IshikoConfigurationTests.sln;
 
-program IshikoConfigurationTests : IshikoTestFrameworkCore
+program IshikoConfigurationTests : IshikoConfiguration, IshikoTestFrameworkCore
 {
     archs = x86 x86_64;
 

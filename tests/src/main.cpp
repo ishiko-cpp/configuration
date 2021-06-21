@@ -4,6 +4,8 @@
     See https://github.com/ishiko-cpp/configuration/blob/main/LICENSE.txt
 */
 
+#include "CommandLineParserTests.h"
+#include "CommandLineSpecificationTests.h"
 #include <Ishiko/TestFramework/TestFrameworkCore.h>
 
 using namespace Ishiko::Tests;
@@ -11,6 +13,10 @@ using namespace Ishiko::Tests;
 int main(int argc, char* argv[])
 {
     TestHarness theTestHarness("IshikoConfiguration");
+
+    TestSequence& theTests = theTestHarness.tests();
+    theTests.append<CommandLineSpecificationTests>();
+    theTests.append<CommandLineParserTests>();
 
     return theTestHarness.run();
 }
