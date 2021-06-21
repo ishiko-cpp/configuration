@@ -18,8 +18,16 @@ program IshikoConfigurationTests : IshikoTestFrameworkCore
         libs += IshikoTestFrameworkCore IshikoProcess IshikoText IshikoErrors boost_filesystem boost_system;
     }
 
+    headers
+    {
+        ../../src/CommandLineParserTests.h
+        ../../src/CommandLineSpecificationTests.h
+    }
+
     sources
     {
+        ../../src/CommandLineParserTests.cpp
+        ../../src/CommandLineSpecificationTests.cpp
         ../../src/main.cpp
     }
 }
