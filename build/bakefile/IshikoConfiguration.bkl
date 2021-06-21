@@ -30,5 +30,11 @@ library IshikoConfiguration
     headers
     {
         ../../include/Ishiko/Configuration.h
+        ../../include/Ishiko/Configuration/CommandLineSpecification.h
+    }
+
+    sources
+    {
+        ../../src/CommandLineSpecification.cpp
     }
 }

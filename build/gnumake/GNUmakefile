@@ -45,13 +45,30 @@ _false :=
 _not    = $(if $(1),$(_false),$(_true_))
 _equal  = $(and $(findstring $(1),$(2)),$(findstring $(2),$(1)))
 
+
+# The directory for the build files, may be overridden on make command line.
+builddir = .
+
+ifneq ($(builddir),.)
+_builddir := $(if $(findstring $(abspath $(builddir)),$(builddir)),,../../)$(builddir)/../gnumake/
+_builddir_error := $(shell mkdir -p $(_builddir) 2>&1)
+$(if $(_builddir_error),$(error Failed to create build directory: $(_builddir_error)))
+endif
 all: ../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoConfiguration-d,IshikoConfiguration).a
 
-../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoConfiguration-d,IshikoConfiguration).a:
-	$(AR) rc $@ 
+../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoConfiguration-d,IshikoConfiguration).a: $(_builddir)IshikoConfiguration_CommandLineSpecification.o
+	$(AR) rc $@ $(_builddir)IshikoConfiguration_CommandLineSpecification.o
 	$(RANLIB) $@
 
+$(_builddir)IshikoConfiguration_CommandLineSpecification.o: ../../src/CommandLineSpecification.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../include/Ishiko/Configuration -std=c++11 ../../src/CommandLineSpecification.cpp
+
 clean:
+	rm -f $(_builddir)*.o
+	rm -f $(_builddir)*.d
 	rm -f ../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoConfiguration-d,IshikoConfiguration).a
 
 .PHONY: all clean
+
+# Dependencies tracking:
+-include $(_builddir)*.d
