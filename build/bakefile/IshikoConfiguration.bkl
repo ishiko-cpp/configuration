@@ -1,0 +1,34 @@
+toolsets = gnu vs2017 vs2015 vs2013;
+
+gnu.makefile = ../GNUmake/GNUmakefile;
+vs2017.solutionfile = ../vc15/IshikoConfiguration.sln;
+vs2015.solutionfile = ../vc14/IshikoConfiguration.sln;
+vs2013.solutionfile = ../vc12/IshikoConfiguration.sln;
+
+library Configuration
+{
+    archs = x86 x86_64;
+
+    includedirs += ../../include/Ishiko/Configuration;
+
+    if ($(toolset) == gnu)
+    {
+        cxx-compiler-options = "-std=c++11";
+        outputdir = ../../lib;
+    }
+
+    if ($(toolset) != gnu)
+    {
+        outputdir = ../../lib/$(arch);
+    }
+
+    if ($(config) == Debug)
+    {
+        basename = IshikoConfiguration-d;
+    }
+
+    headers
+    {
+        ../../include/Ishiko/Configuration.h
+    }
+}
