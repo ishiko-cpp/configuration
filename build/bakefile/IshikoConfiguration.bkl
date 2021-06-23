@@ -32,11 +32,13 @@ library IshikoConfiguration
         ../../include/Ishiko/Configuration.h
         ../../include/Ishiko/Configuration/CommandLineParser.h
         ../../include/Ishiko/Configuration/CommandLineSpecification.h
+        ../../include/Ishiko/Configuration/Configuration.h
     }
 
     sources
     {
         ../../src/CommandLineParser.cpp
         ../../src/CommandLineSpecification.cpp
+        ../../src/Configuration.cpp
     }
 }

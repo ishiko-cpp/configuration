@@ -7,6 +7,10 @@
 #ifndef _ISHIKO_CONFIGURATION_H_
 #define _ISHIKO_CONFIGURATION_H_
 
-#include "Process/linkoptions.h"
+#include "Configuration/CommandLineParser.h"
+#include "Configuration/CommandLineSpecification.h"
+#include "Configuration/Configuration.h"
+
+#include "Configuration/linkoptions.h"
 
 #endif

@@ -56,8 +56,8 @@ $(if $(_builddir_error),$(error Failed to create build directory: $(_builddir_er
 endif
 all: ../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoConfiguration-d,IshikoConfiguration).a
 
-../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoConfiguration-d,IshikoConfiguration).a: $(_builddir)IshikoConfiguration_CommandLineParser.o $(_builddir)IshikoConfiguration_CommandLineSpecification.o
-	$(AR) rc $@ $(_builddir)IshikoConfiguration_CommandLineParser.o $(_builddir)IshikoConfiguration_CommandLineSpecification.o
+../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoConfiguration-d,IshikoConfiguration).a: $(_builddir)IshikoConfiguration_CommandLineParser.o $(_builddir)IshikoConfiguration_CommandLineSpecification.o $(_builddir)IshikoConfiguration_Configuration.o
+	$(AR) rc $@ $(_builddir)IshikoConfiguration_CommandLineParser.o $(_builddir)IshikoConfiguration_CommandLineSpecification.o $(_builddir)IshikoConfiguration_Configuration.o
 	$(RANLIB) $@
 
 $(_builddir)IshikoConfiguration_CommandLineParser.o: ../../src/CommandLineParser.cpp
@@ -65,6 +65,9 @@ $(_builddir)IshikoConfiguration_CommandLineParser.o: ../../src/CommandLineParser
 
 $(_builddir)IshikoConfiguration_CommandLineSpecification.o: ../../src/CommandLineSpecification.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../include/Ishiko/Configuration -std=c++11 ../../src/CommandLineSpecification.cpp
+
+$(_builddir)IshikoConfiguration_Configuration.o: ../../src/Configuration.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../include/Ishiko/Configuration -std=c++11 ../../src/Configuration.cpp
 
 clean:
 	rm -f $(_builddir)*.o
