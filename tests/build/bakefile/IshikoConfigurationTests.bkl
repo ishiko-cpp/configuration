@@ -1,4 +1,4 @@
-import ../../../include/Ishiko/Configuration.bkl;
+import ../../../include/Ishiko/Config.bkl;
 ishikopath = envvar("ISHIKO_CPP");
 import $(ishikopath)/tests/include/Ishiko/Tests/Core.bkl;
 
@@ -9,14 +9,14 @@ vs2017.solutionfile = ../vc15/IshikoConfigurationTests.sln;
 vs2015.solutionfile = ../vc14/IshikoConfigurationTests.sln;
 vs2013.solutionfile = ../vc12/IshikoConfigurationTests.sln;
 
-program IshikoConfigurationTests : IshikoConfiguration, IshikoTestsCore
+program IshikoConfigurationTests : IshikoConfig, IshikoTestsCore
 {
     archs = x86 x86_64;
 
     if ($(toolset) == gnu)
     {
         cxx-compiler-options = "-std=c++11";
-        libs += IshikoTestsCore IshikoConfiguration IshikoProcess IshikoText IshikoErrors boost_filesystem boost_system;
+        libs += IshikoTestsCore IshikoConfig IshikoProcess IshikoText IshikoErrors boost_filesystem boost_system;
     }
 
     headers
