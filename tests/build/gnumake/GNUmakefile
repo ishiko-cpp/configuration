@@ -90,24 +90,24 @@ ISHIKO_CPP_TESTFRAMEWORK_ROOT ?= $(ISHIKO_CPP)/tests
 
 # ------------
 
-all: $(_builddir)IshikoConfigurationTests
+all: $(_builddir)IshikoConfigTests
 
-$(_builddir)IshikoConfigurationTests: $(_builddir)IshikoConfigurationTests_CommandLineParserTests.o $(_builddir)IshikoConfigurationTests_CommandLineSpecificationTests.o $(_builddir)IshikoConfigurationTests_main.o
-	$(CXX) -o $@ $(LDFLAGS) $(_builddir)IshikoConfigurationTests_CommandLineParserTests.o $(_builddir)IshikoConfigurationTests_CommandLineSpecificationTests.o $(_builddir)IshikoConfigurationTests_main.o -L$(ISHIKO_CPP_CONFIGURATION_ROOT)/lib -L$(ISHIKO_CPP_ERRORS_ROOT)/lib -L$(ISHIKO_CPP_BOOST_ROOT)/lib -L$(ISHIKO_CPP_FILESYSTEM_ROOT)/lib -L$(ISHIKO_CPP_TEXT_ROOT)/lib -L$(ISHIKO_CPP_TYPES_ROOT)/lib -L$(ISHIKO_CPP_DIFF_ROOT)/lib -L$(ISHIKO_CPP_PROCESS_ROOT)/lib -L$(ISHIKO_CPP_TESTFRAMEWORK_ROOT)/lib -lIshikoTestsCore -lIshikoConfiguration -lIshikoProcess -lIshikoText -lIshikoErrors -lboost_filesystem -lboost_system -pthread
+$(_builddir)IshikoConfigTests: $(_builddir)IshikoConfigTests_CommandLineParserTests.o $(_builddir)IshikoConfigTests_CommandLineSpecificationTests.o $(_builddir)IshikoConfigTests_main.o
+	$(CXX) -o $@ $(LDFLAGS) $(_builddir)IshikoConfigTests_CommandLineParserTests.o $(_builddir)IshikoConfigTests_CommandLineSpecificationTests.o $(_builddir)IshikoConfigTests_main.o -L$(ISHIKO_CPP_CONFIGURATION_ROOT)/lib -L$(ISHIKO_CPP_ERRORS_ROOT)/lib -L$(ISHIKO_CPP_BOOST_ROOT)/lib -L$(ISHIKO_CPP_FILESYSTEM_ROOT)/lib -L$(ISHIKO_CPP_TEXT_ROOT)/lib -L$(ISHIKO_CPP_TYPES_ROOT)/lib -L$(ISHIKO_CPP_DIFF_ROOT)/lib -L$(ISHIKO_CPP_PROCESS_ROOT)/lib -L$(ISHIKO_CPP_TESTFRAMEWORK_ROOT)/lib -lIshikoTestsCore -lIshikoConfig -lIshikoProcess -lIshikoText -lIshikoErrors -lboost_filesystem -lboost_system -pthread
 
-$(_builddir)IshikoConfigurationTests_CommandLineParserTests.o: ../../src/CommandLineParserTests.cpp
+$(_builddir)IshikoConfigTests_CommandLineParserTests.o: ../../src/CommandLineParserTests.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(ISHIKO_CPP_CONFIGURATION_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PLATFORM_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_FILESYSTEM_ROOT)/include -I$(ISHIKO_CPP_TEXT_ROOT)/include -I$(ISHIKO_CPP_TYPES_ROOT)/include -I$(ISHIKO_CPP_DIFF_ROOT)/include -I$(ISHIKO_CPP_PROCESS_ROOT)/include -I$(ISHIKO_CPP_TESTFRAMEWORK_ROOT)/include -std=c++11 ../../src/CommandLineParserTests.cpp
 
-$(_builddir)IshikoConfigurationTests_CommandLineSpecificationTests.o: ../../src/CommandLineSpecificationTests.cpp
+$(_builddir)IshikoConfigTests_CommandLineSpecificationTests.o: ../../src/CommandLineSpecificationTests.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(ISHIKO_CPP_CONFIGURATION_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PLATFORM_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_FILESYSTEM_ROOT)/include -I$(ISHIKO_CPP_TEXT_ROOT)/include -I$(ISHIKO_CPP_TYPES_ROOT)/include -I$(ISHIKO_CPP_DIFF_ROOT)/include -I$(ISHIKO_CPP_PROCESS_ROOT)/include -I$(ISHIKO_CPP_TESTFRAMEWORK_ROOT)/include -std=c++11 ../../src/CommandLineSpecificationTests.cpp
 
-$(_builddir)IshikoConfigurationTests_main.o: ../../src/main.cpp
+$(_builddir)IshikoConfigTests_main.o: ../../src/main.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(ISHIKO_CPP_CONFIGURATION_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PLATFORM_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_FILESYSTEM_ROOT)/include -I$(ISHIKO_CPP_TEXT_ROOT)/include -I$(ISHIKO_CPP_TYPES_ROOT)/include -I$(ISHIKO_CPP_DIFF_ROOT)/include -I$(ISHIKO_CPP_PROCESS_ROOT)/include -I$(ISHIKO_CPP_TESTFRAMEWORK_ROOT)/include -std=c++11 ../../src/main.cpp
 
 clean:
 	rm -f $(_builddir)*.o
 	rm -f $(_builddir)*.d
-	rm -f $(_builddir)IshikoConfigurationTests
+	rm -f $(_builddir)IshikoConfigTests
 
 .PHONY: all clean
 
