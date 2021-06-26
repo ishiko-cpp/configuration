@@ -5,7 +5,7 @@
 */
 
 #include "CommandLineSpecificationTests.h"
-#include "Ishiko/Configuration/CommandLineSpecification.h"
+#include "Ishiko/Config/CommandLineSpecification.h"
 
 using namespace Ishiko::Configuration;
 using namespace Ishiko::Tests;

@@ -44,4 +44,4 @@ jobs:
           command: cd /projects/ishiko/cpp/config/tests/build/gnumake && make
       - run:
           name: Run the tests
-          command: cd /projects/ishiko/cpp/config/tests/build/gnumake && ./IshikoConfigurationTests
+          command: cd /projects/ishiko/cpp/config/tests/build/gnumake && ./IshikoConfigTests
