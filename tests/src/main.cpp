@@ -6,7 +6,7 @@
 
 #include "CommandLineParserTests.h"
 #include "CommandLineSpecificationTests.h"
-#include <Ishiko/TestFramework/TestFrameworkCore.h>
+#include <Ishiko/Tests/Core.h>
 
 using namespace Ishiko::Tests;
 
