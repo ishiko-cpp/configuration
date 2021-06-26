@@ -5,7 +5,7 @@
 */
 
 #include "CommandLineParserTests.h"
-#include "Ishiko/Configuration/CommandLineParser.h"
+#include "Ishiko/Config/CommandLineParser.h"
 
 using namespace Ishiko::Configuration;
 using namespace Ishiko::Tests;
