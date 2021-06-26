@@ -1,0 +1,20 @@
+setting ISHIKO_CPP_CONFIGURATION_ROOT
+{
+    help = "Path to the Ishiko Configuration installation";
+    default = '$(ISHIKO_CPP)/config';
+}
+
+template IshikoConfiguration
+{
+    includedirs += $(ISHIKO_CPP_CONFIGURATION_ROOT)/include;
+
+    if ($(toolset) == gnu)
+    {
+        libdirs += $(ISHIKO_CPP_CONFIGURATION_ROOT)/lib;
+    }
+
+    if ($(toolset) != gnu)
+    {
+        libdirs += $(ISHIKO_CPP_CONFIGURATION_ROOT)/lib/$(arch);
+    }
+}
