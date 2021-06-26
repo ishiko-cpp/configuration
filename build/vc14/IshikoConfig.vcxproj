@@ -21,10 +21,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{550BDC76-E372-507E-9C4B-C191618B00E4}</ProjectGuid>
+    <ProjectGuid>{09C72A3F-FC69-5C7F-A57F-AD884C6837D1}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>IshikoConfiguration</RootNamespace>
-    <ProjectName>IshikoConfiguration</ProjectName>
+    <RootNamespace>IshikoConfig</RootNamespace>
+    <ProjectName>IshikoConfig</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -68,11 +68,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <TargetName>IshikoConfiguration-d</TargetName>
+    <TargetName>IshikoConfig-d</TargetName>
     <OutDir>..\bakefile\..\..\lib\$(Platform)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <TargetName>IshikoConfiguration-d</TargetName>
+    <TargetName>IshikoConfig-d</TargetName>
     <OutDir>..\bakefile\..\..\lib\$(Platform)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -88,7 +88,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>..\..\include\Ishiko\Configuration</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include\Ishiko\Config</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -103,7 +103,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>..\..\include\Ishiko\Configuration</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include\Ishiko\Config</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -120,7 +120,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>..\..\include\Ishiko\Configuration</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include\Ishiko\Config</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -139,7 +139,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>..\..\include\Ishiko\Configuration</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include\Ishiko\Config</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -155,10 +155,10 @@
     <ClCompile Include="..\..\src\Configuration.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\Ishiko\Configuration.h" />
-    <ClInclude Include="..\..\include\Ishiko\Configuration\CommandLineParser.h" />
-    <ClInclude Include="..\..\include\Ishiko\Configuration\CommandLineSpecification.h" />
-    <ClInclude Include="..\..\include\Ishiko\Configuration\Configuration.h" />
+    <ClInclude Include="..\..\include\Ishiko\Config.h" />
+    <ClInclude Include="..\..\include\Ishiko\Config\CommandLineParser.h" />
+    <ClInclude Include="..\..\include\Ishiko\Config\CommandLineSpecification.h" />
+    <ClInclude Include="..\..\include\Ishiko\Config\Configuration.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
