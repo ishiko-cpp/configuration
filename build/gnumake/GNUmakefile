@@ -54,25 +54,25 @@ _builddir := $(if $(findstring $(abspath $(builddir)),$(builddir)),,../../)$(bui
 _builddir_error := $(shell mkdir -p $(_builddir) 2>&1)
 $(if $(_builddir_error),$(error Failed to create build directory: $(_builddir_error)))
 endif
-all: ../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoConfiguration-d,IshikoConfiguration).a
+all: ../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoConfig-d,IshikoConfig).a
 
-../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoConfiguration-d,IshikoConfiguration).a: $(_builddir)IshikoConfiguration_CommandLineParser.o $(_builddir)IshikoConfiguration_CommandLineSpecification.o $(_builddir)IshikoConfiguration_Configuration.o
-	$(AR) rc $@ $(_builddir)IshikoConfiguration_CommandLineParser.o $(_builddir)IshikoConfiguration_CommandLineSpecification.o $(_builddir)IshikoConfiguration_Configuration.o
+../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoConfig-d,IshikoConfig).a: $(_builddir)IshikoConfig_CommandLineParser.o $(_builddir)IshikoConfig_CommandLineSpecification.o $(_builddir)IshikoConfig_Configuration.o
+	$(AR) rc $@ $(_builddir)IshikoConfig_CommandLineParser.o $(_builddir)IshikoConfig_CommandLineSpecification.o $(_builddir)IshikoConfig_Configuration.o
 	$(RANLIB) $@
 
-$(_builddir)IshikoConfiguration_CommandLineParser.o: ../../src/CommandLineParser.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../include/Ishiko/Configuration -std=c++11 ../../src/CommandLineParser.cpp
+$(_builddir)IshikoConfig_CommandLineParser.o: ../../src/CommandLineParser.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../include/Ishiko/Config -std=c++11 ../../src/CommandLineParser.cpp
 
-$(_builddir)IshikoConfiguration_CommandLineSpecification.o: ../../src/CommandLineSpecification.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../include/Ishiko/Configuration -std=c++11 ../../src/CommandLineSpecification.cpp
+$(_builddir)IshikoConfig_CommandLineSpecification.o: ../../src/CommandLineSpecification.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../include/Ishiko/Config -std=c++11 ../../src/CommandLineSpecification.cpp
 
-$(_builddir)IshikoConfiguration_Configuration.o: ../../src/Configuration.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../include/Ishiko/Configuration -std=c++11 ../../src/Configuration.cpp
+$(_builddir)IshikoConfig_Configuration.o: ../../src/Configuration.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../include/Ishiko/Config -std=c++11 ../../src/Configuration.cpp
 
 clean:
 	rm -f $(_builddir)*.o
 	rm -f $(_builddir)*.d
-	rm -f ../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoConfiguration-d,IshikoConfiguration).a
+	rm -f ../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoConfig-d,IshikoConfig).a
 
 .PHONY: all clean
 
