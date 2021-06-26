@@ -5,11 +5,11 @@ import $(ishikopath)/tests/include/Ishiko/Tests/Core.bkl;
 toolsets = gnu vs2017 vs2015 vs2013;
 
 gnu.makefile = ../gnumake/GNUmakefile;
-vs2017.solutionfile = ../vc15/IshikoConfigurationTests.sln;
-vs2015.solutionfile = ../vc14/IshikoConfigurationTests.sln;
-vs2013.solutionfile = ../vc12/IshikoConfigurationTests.sln;
+vs2017.solutionfile = ../vc15/IshikoConfignTests.sln;
+vs2015.solutionfile = ../vc14/IshikoConfigTests.sln;
+vs2013.solutionfile = ../vc12/IshikoConfigTests.sln;
 
-program IshikoConfigurationTests : IshikoConfig, IshikoTestsCore
+program IshikoConfigTests : IshikoConfig, IshikoTestsCore
 {
     archs = x86 x86_64;
 
