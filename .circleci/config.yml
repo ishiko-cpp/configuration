@@ -45,3 +45,18 @@ jobs:
       - run:
           name: Run the tests
           command: cd /projects/ishiko/cpp/config/tests/build/gnumake && ./IshikoConfigTests
+workflows:
+  version: 2
+  continuous_build:
+    jobs:
+      - build
+  weekly_build:
+    jobs:
+      - build
+    triggers:
+      - schedule:
+          cron: "0 8 * * 0"
+          filters:
+            branches:
+              only:
+                 - main
