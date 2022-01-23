@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2021 Xavier Leclercq
+    Copyright (c) 2021-2022 Xavier Leclercq
     Released under the MIT License
     See https://github.com/ishiko-cpp/configuration/blob/main/LICENSE.txt
 */
@@ -11,6 +11,6 @@
 #include "Configuration/CommandLineSpecification.h"
 #include "Configuration/Configuration.h"
 
-#include "Configuration/linkoptions.h"
+#include "Configuration/linkoptions.hpp"
 
 #endif

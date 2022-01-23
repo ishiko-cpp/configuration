@@ -1,7 +1,7 @@
 /*
     Copyright (c) 2021 Xavier Leclercq
     Released under the MIT License
-    See https://github.com/ishiko-cpp/configuration/blob/main/LICENSE.txt
+    See https://github.com/ishiko-cpp/config/blob/main/LICENSE.txt
 */
 
 #ifndef _ISHIKO_PROCESS_COMMANDLINEPARSER_H_

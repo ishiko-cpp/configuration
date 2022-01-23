@@ -1,7 +1,7 @@
 /*
-    Copyright (c) 2021 Xavier Leclercq
+    Copyright (c) 2021-2022 Xavier Leclercq
     Released under the MIT License
-    See https://github.com/ishiko-cpp/configuration/blob/main/LICENSE.txt
+    See https://github.com/ishiko-cpp/config/blob/main/LICENSE.txt
 */
 
 #include "CommandLineParserTests.h"
@@ -10,8 +10,8 @@
 using namespace Ishiko::Configuration;
 using namespace Ishiko::Tests;
 
-CommandLineParserTests::CommandLineParserTests(const TestNumber& number, const TestEnvironment& environment)
-    : TestSequence(number, "CommandLineParser tests", environment)
+CommandLineParserTests::CommandLineParserTests(const TestNumber& number, const TestContext& context)
+    : TestSequence(number, "CommandLineParser tests", context)
 {
     append<HeapAllocationErrorsTest>("Constructor test 1", ConstructorTest1);
 }
@@ -20,5 +20,5 @@ void CommandLineParserTests::ConstructorTest1(Test& test)
 {
     CommandLineParser parser;
 
-    ISHTF_PASS();
+    ISHIKO_PASS();
 }
