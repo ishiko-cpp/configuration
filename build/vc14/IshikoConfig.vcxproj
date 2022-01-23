@@ -159,6 +159,7 @@
     <ClInclude Include="..\..\include\Ishiko\Config\CommandLineParser.h" />
     <ClInclude Include="..\..\include\Ishiko\Config\CommandLineSpecification.h" />
     <ClInclude Include="..\..\include\Ishiko\Config\Configuration.h" />
+    <ClInclude Include="..\..\include\Ishiko\Config\linkoptions.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

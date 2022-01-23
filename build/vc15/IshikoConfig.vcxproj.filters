@@ -29,6 +29,9 @@
     <ClInclude Include="..\..\include\Ishiko\Config\Configuration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\Ishiko\Config\linkoptions.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\CommandLineParser.cpp">

@@ -34,6 +34,7 @@ library IshikoConfig
         ../../include/Ishiko/Config/CommandLineParser.h
         ../../include/Ishiko/Config/CommandLineSpecification.h
         ../../include/Ishiko/Config/Configuration.h
+        ../../include/Ishiko/Config/linkoptions.hpp
     }
 
     sources
