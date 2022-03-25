@@ -7,8 +7,8 @@
 #include "CommandLineSpecificationTests.h"
 #include "Ishiko/Config/CommandLineSpecification.h"
 
+using namespace Ishiko;
 using namespace Ishiko::Configuration;
-using namespace Ishiko::Tests;
 
 CommandLineSpecificationTests::CommandLineSpecificationTests(const TestNumber& number, const TestContext& context)
     : TestSequence(number, "CommandLineSpecification tests", context)
@@ -21,7 +21,7 @@ void CommandLineSpecificationTests::ConstructorTest1(Test& test)
 {
     CommandLineSpecification spec;
 
-    ISHIKO_PASS();
+    ISHIKO_TEST_PASS();
 }
 
 void CommandLineSpecificationTests::AddNamedOptionTest1(Test& test)
@@ -33,7 +33,7 @@ void CommandLineSpecificationTests::AddNamedOptionTest1(Test& test)
     CommandLineSpecification::OptionDetails details;
     bool found = spec.find("option1", details);
 
-    ISHIKO_FAIL_IF_NOT(found);
-    ISHIKO_FAIL_IF_NEQ(details.defaultValue, "default");
-    ISHIKO_PASS();
+    ISHIKO_TEST_FAIL_IF_NOT(found);
+    ISHIKO_TEST_FAIL_IF_NEQ(details.defaultValue, "default");
+    ISHIKO_TEST_PASS();
 }
