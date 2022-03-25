@@ -7,8 +7,8 @@
 #include "CommandLineParserTests.h"
 #include "Ishiko/Config/CommandLineParser.h"
 
+using namespace Ishiko;
 using namespace Ishiko::Configuration;
-using namespace Ishiko::Tests;
 
 CommandLineParserTests::CommandLineParserTests(const TestNumber& number, const TestContext& context)
     : TestSequence(number, "CommandLineParser tests", context)
@@ -20,5 +20,5 @@ void CommandLineParserTests::ConstructorTest1(Test& test)
 {
     CommandLineParser parser;
 
-    ISHIKO_PASS();
+    ISHIKO_TEST_PASS();
 }
