@@ -1,10 +1,10 @@
 setting ISHIKO_CPP_CONFIGURATION_ROOT
 {
     help = "Path to the Ishiko Configuration installation";
-    default = '$(ISHIKO_CPP)/config';
+    default = '$(ISHIKO_CPP)/configuration';
 }
 
-template IshikoConfig
+template IshikoConfiguration
 {
     includedirs += $(ISHIKO_CPP_CONFIGURATION_ROOT)/include;
 

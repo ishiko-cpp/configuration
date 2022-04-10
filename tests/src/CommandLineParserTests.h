@@ -7,7 +7,7 @@
 #ifndef _ISHIKO_CPP_CONFIGURATION_TEST_COMMANDLINEPARSERTESTS_H_
 #define _ISHIKO_CPP_CONFIGURATION_TEST_COMMANDLINEPARSERTESTS_H_
 
-#include <Ishiko/Tests/Core.hpp>
+#include <Ishiko/TestFramework/Core.hpp>
 
 class CommandLineParserTests : public Ishiko::TestSequence
 {
