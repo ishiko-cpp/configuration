@@ -20,16 +20,16 @@
     <ClInclude Include="..\..\include\Ishiko\Config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Ishiko\Config\CommandLineParser.h">
+    <ClInclude Include="..\..\include\Ishiko\Configuration\CommandLineParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Ishiko\Config\CommandLineSpecification.h">
+    <ClInclude Include="..\..\include\Ishiko\Configuration\CommandLineSpecification.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Ishiko\Config\Configuration.h">
+    <ClInclude Include="..\..\include\Ishiko\Configuration\Configuration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Ishiko\Config\linkoptions.hpp">
+    <ClInclude Include="..\..\include\Ishiko\Configuration\linkoptions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
