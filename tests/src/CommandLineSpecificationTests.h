@@ -7,7 +7,7 @@
 #ifndef _ISHIKO_CPP_CONFIGURATION_TEST_COMMANDLINESPECIFICATIONTESTS_H_
 #define _ISHIKO_CPP_CONFIGURATION_TEST_COMMANDLINESPECIFICATIONTESTS_H_
 
-#include <Ishiko/Tests/Core.hpp>
+#include <Ishiko/TestFramework/Core.hpp>
 
 class CommandLineSpecificationTests : public Ishiko::TestSequence
 {

@@ -68,7 +68,7 @@ endif
 # 
 
 # Path to the Ishiko Configuration installation
-ISHIKO_CPP_CONFIGURATION_ROOT ?= $(ISHIKO_CPP)/config
+ISHIKO_CPP_CONFIGURATION_ROOT ?= $(ISHIKO_CPP)/configuration
 # Path to the Ishiko BasePlatform installation
 ISHIKO_CPP_BASEPLATFORM_ROOT ?= $(ISHIKO_CPP)/base-platform
 # Path to the Ishiko Errors installation
@@ -93,7 +93,7 @@ ISHIKO_CPP_TESTFRAMEWORK_ROOT ?= $(ISHIKO_CPP)/test-framework
 all: $(_builddir)IshikoConfigTests
 
 $(_builddir)IshikoConfigTests: $(_builddir)IshikoConfigTests_CommandLineParserTests.o $(_builddir)IshikoConfigTests_CommandLineSpecificationTests.o $(_builddir)IshikoConfigTests_main.o
-	$(CXX) -o $@ $(LDFLAGS) $(_builddir)IshikoConfigTests_CommandLineParserTests.o $(_builddir)IshikoConfigTests_CommandLineSpecificationTests.o $(_builddir)IshikoConfigTests_main.o -L$(ISHIKO_CPP_CONFIGURATION_ROOT)/lib -L$(ISHIKO_CPP_ERRORS_ROOT)/lib -L$(ISHIKO_CPP_BOOST_ROOT)/lib -L$(ISHIKO_CPP_FILESYSTEM_ROOT)/lib -L$(ISHIKO_CPP_TEXT_ROOT)/lib -L$(ISHIKO_CPP_TYPES_ROOT)/lib -L$(ISHIKO_CPP_DIFF_ROOT)/lib -L$(ISHIKO_CPP_PROCESS_ROOT)/lib -L$(ISHIKO_CPP_TESTFRAMEWORK_ROOT)/lib -lIshikoTestsCore -lIshikoConfig -lIshikoProcess -lIshikoText -lIshikoErrors -lboost_filesystem -lboost_system -pthread
+	$(CXX) -o $@ $(LDFLAGS) $(_builddir)IshikoConfigTests_CommandLineParserTests.o $(_builddir)IshikoConfigTests_CommandLineSpecificationTests.o $(_builddir)IshikoConfigTests_main.o -L$(ISHIKO_CPP_CONFIGURATION_ROOT)/lib -L$(ISHIKO_CPP_ERRORS_ROOT)/lib -L$(ISHIKO_CPP_BOOST_ROOT)/lib -L$(ISHIKO_CPP_FILESYSTEM_ROOT)/lib -L$(ISHIKO_CPP_TEXT_ROOT)/lib -L$(ISHIKO_CPP_TYPES_ROOT)/lib -L$(ISHIKO_CPP_DIFF_ROOT)/lib -L$(ISHIKO_CPP_PROCESS_ROOT)/lib -L$(ISHIKO_CPP_TESTFRAMEWORK_ROOT)/lib -lIshikoTestFrameworkCore -lIshikoConfig -lIshikoProcess -lIshikoText -lIshikoErrors -lboost_filesystem -lboost_system -pthread
 
 $(_builddir)IshikoConfigTests_CommandLineParserTests.o: ../../src/CommandLineParserTests.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(ISHIKO_CPP_CONFIGURATION_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BASEPLATFORM_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_FILESYSTEM_ROOT)/include -I$(ISHIKO_CPP_TEXT_ROOT)/include -I$(ISHIKO_CPP_TYPES_ROOT)/include -I$(ISHIKO_CPP_DIFF_ROOT)/include -I$(ISHIKO_CPP_PROCESS_ROOT)/include -I$(ISHIKO_CPP_TESTFRAMEWORK_ROOT)/include -std=c++11 ../../src/CommandLineParserTests.cpp
