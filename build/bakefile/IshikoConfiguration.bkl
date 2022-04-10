@@ -1,0 +1,46 @@
+toolsets = gnu vs2019 vs2017 vs2015 vs2013;
+
+gnu.makefile = ../gnumake/GNUmakefile;
+vs2019.solutionfile = ../vc16/IshikoConfiguration.sln;
+vs2017.solutionfile = ../vc15/IshikoConfiguration.sln;
+vs2015.solutionfile = ../vc14/IshikoConfiguration.sln;
+vs2013.solutionfile = ../vc12/IshikoConfiguration.sln;
+
+library IshikoConfiguration
+{
+    archs = x86 x86_64;
+
+    includedirs += ../../include/Ishiko/Configuration;
+
+    if ($(toolset) == gnu)
+    {
+        cxx-compiler-options = "-std=c++11";
+        outputdir = ../../lib;
+    }
+
+    if ($(toolset) != gnu)
+    {
+        outputdir = ../../lib/$(arch);
+    }
+
+    if ($(config) == Debug)
+    {
+        basename = IshikoConfiguration-d;
+    }
+
+    headers
+    {
+        ../../include/Ishiko/Config.h
+        ../../include/Ishiko/Configuration/CommandLineParser.h
+        ../../include/Ishiko/Configuration/CommandLineSpecification.h
+        ../../include/Ishiko/Configuration/Configuration.h
+        ../../include/Ishiko/Configuration/linkoptions.hpp
+    }
+
+    sources
+    {
+        ../../src/CommandLineParser.cpp
+        ../../src/CommandLineSpecification.cpp
+        ../../src/Configuration.cpp
+    }
+}
