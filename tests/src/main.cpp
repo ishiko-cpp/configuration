@@ -6,7 +6,7 @@
 
 #include "CommandLineParserTests.h"
 #include "CommandLineSpecificationTests.h"
-#include "Ishiko/Config/linkoptions.hpp"
+#include "Ishiko/Configuration/linkoptions.hpp"
 #include <Ishiko/TestFramework/Core.hpp>
 
 using namespace Ishiko;
