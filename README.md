@@ -1,4 +1,4 @@
-# Ishiko/C++ Config
+# Ishiko/C++ Configuration
 
 Configuration utilities.
 
@@ -11,9 +11,9 @@ Configuration utilities.
 
 # Project Status
 
-[![ishiko-cpp](https://circleci.com/gh/ishiko-cpp/config.svg?style=shield)](https://circleci.com/gh/ishiko-cpp/config)
+[![ishiko-cpp](https://circleci.com/gh/ishiko-cpp/configuration.svg?style=shield)](https://circleci.com/gh/ishiko-cpp/configuration)
 
-This project is intended for use by its author only.
+This project is in early development and not ready for public use yet.
 
 # Usage
 
@@ -27,4 +27,4 @@ None.
 
 Copyright (c) 2021-2022 Xavier Leclercq\
 Released under the MIT License\
-See https://github.com/ishiko-cpp/config/blob/main/LICENSE.txt
+See https://github.com/ishiko-cpp/configuration/blob/main/LICENSE.txt
