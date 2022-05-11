@@ -4,8 +4,8 @@
     See https://github.com/ishiko-cpp/configuration/blob/main/LICENSE.txt
 */
 
-#ifndef _ISHIKO_PROCESS_COMMANDLINEPARSER_HPP_
-#define _ISHIKO_PROCESS_COMMANDLINEPARSER_HPP_
+#ifndef _ISHIKO_CONFIGURATION_COMMANDLINEPARSER_HPP_
+#define _ISHIKO_CONFIGURATION_COMMANDLINEPARSER_HPP_
 
 #include "CommandLineSpecification.hpp"
 
