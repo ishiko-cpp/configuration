@@ -1,11 +1,11 @@
 /*
     Copyright (c) 2021-2022 Xavier Leclercq
     Released under the MIT License
-    See https://github.com/ishiko-cpp/config/blob/main/LICENSE.txt
+    See https://github.com/ishiko-cpp/configuration/blob/main/LICENSE.txt
 */
 
-#ifndef _ISHIKO_CPP_CONFIGURATION_TEST_COMMANDLINESPECIFICATIONTESTS_H_
-#define _ISHIKO_CPP_CONFIGURATION_TEST_COMMANDLINESPECIFICATIONTESTS_H_
+#ifndef _ISHIKO_CPP_CONFIGURATION_TEST_COMMANDLINESPECIFICATIONTESTS_HPP_
+#define _ISHIKO_CPP_CONFIGURATION_TEST_COMMANDLINESPECIFICATIONTESTS_HPP_
 
 #include <Ishiko/TestFramework/Core.hpp>
 

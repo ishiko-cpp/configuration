@@ -21,10 +21,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{403CBD57-EE34-53EA-8BCA-AB8D6787A1A4}</ProjectGuid>
+    <ProjectGuid>{E7F88AD3-E67F-54EF-8F46-DA071EDE7263}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>IshikoConfigTests</RootNamespace>
-    <ProjectName>IshikoConfigTests</ProjectName>
+    <RootNamespace>IshikoConfigurationTests</RootNamespace>
+    <ProjectName>IshikoConfigurationTests</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -157,8 +157,8 @@
     <ClCompile Include="..\..\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\CommandLineParserTests.h" />
-    <ClInclude Include="..\..\src\CommandLineSpecificationTests.h" />
+    <ClInclude Include="..\..\src\CommandLineParserTests.hpp" />
+    <ClInclude Include="..\..\src\CommandLineSpecificationTests.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

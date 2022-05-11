@@ -1,15 +1,12 @@
 /*
-    Copyright (c) 2021 Xavier Leclercq
+    Copyright (c) 2021-2022 Xavier Leclercq
     Released under the MIT License
-    See https://github.com/ishiko-cpp/config/blob/main/LICENSE.txt
+    See https://github.com/ishiko-cpp/configuration/blob/main/LICENSE.txt
 */
 
-#include "CommandLineSpecification.h"
+#include "CommandLineSpecification.hpp"
 
-namespace Ishiko
-{
-namespace Configuration
-{
+using namespace Ishiko;
 
 void CommandLineSpecification::addNamedOption(const std::string& name, const OptionDetails& details)
 {
@@ -28,7 +25,4 @@ bool CommandLineSpecification::find(const std::string& name, OptionDetails& deta
     {
         return false;
     }
-}
-
-}
 }

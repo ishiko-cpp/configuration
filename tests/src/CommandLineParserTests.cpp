@@ -1,14 +1,13 @@
 /*
     Copyright (c) 2021-2022 Xavier Leclercq
     Released under the MIT License
-    See https://github.com/ishiko-cpp/config/blob/main/LICENSE.txt
+    See https://github.com/ishiko-cpp/configuration/blob/main/LICENSE.txt
 */
 
-#include "CommandLineParserTests.h"
-#include "Ishiko/Configuration/CommandLineParser.h"
+#include "CommandLineParserTests.hpp"
+#include "Ishiko/Configuration/CommandLineParser.hpp"
 
 using namespace Ishiko;
-using namespace Ishiko::Configuration;
 
 CommandLineParserTests::CommandLineParserTests(const TestNumber& number, const TestContext& context)
     : TestSequence(number, "CommandLineParser tests", context)
