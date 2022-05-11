@@ -17,16 +17,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\Ishiko\Config.h">
+    <ClInclude Include="..\..\include\Ishiko\Configuration.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Ishiko\Configuration\CommandLineParser.h">
+    <ClInclude Include="..\..\include\Ishiko\Configuration\CommandLineParser.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Ishiko\Configuration\CommandLineSpecification.h">
+    <ClInclude Include="..\..\include\Ishiko\Configuration\CommandLineSpecification.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Ishiko\Configuration\Configuration.h">
+    <ClInclude Include="..\..\include\Ishiko\Configuration\Configuration.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Ishiko\Configuration\linkoptions.hpp">
