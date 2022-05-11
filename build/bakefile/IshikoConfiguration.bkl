@@ -30,10 +30,10 @@ library IshikoConfiguration
 
     headers
     {
-        ../../include/Ishiko/Config.h
-        ../../include/Ishiko/Configuration/CommandLineParser.h
-        ../../include/Ishiko/Configuration/CommandLineSpecification.h
-        ../../include/Ishiko/Configuration/Configuration.h
+        ../../include/Ishiko/Configuration.hpp
+        ../../include/Ishiko/Configuration/CommandLineParser.hpp
+        ../../include/Ishiko/Configuration/CommandLineSpecification.hpp
+        ../../include/Ishiko/Configuration/Configuration.hpp
         ../../include/Ishiko/Configuration/linkoptions.hpp
     }
 
