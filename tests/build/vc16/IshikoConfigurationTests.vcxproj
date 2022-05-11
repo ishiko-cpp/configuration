@@ -154,11 +154,13 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\CommandLineParserTests.cpp" />
     <ClCompile Include="..\..\src\CommandLineSpecificationTests.cpp" />
+    <ClCompile Include="..\..\src\ConfigurationTests.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\CommandLineParserTests.hpp" />
     <ClInclude Include="..\..\src\CommandLineSpecificationTests.hpp" />
+    <ClInclude Include="..\..\src\ConfigurationTests.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
