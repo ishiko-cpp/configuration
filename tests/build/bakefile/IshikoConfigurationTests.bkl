@@ -5,12 +5,12 @@ import $(ishikopath)/test-framework/include/Ishiko/TestFramework/Core.bkl;
 toolsets = gnu vs2019 vs2017 vs2015 vs2013;
 
 gnu.makefile = ../gnumake/GNUmakefile;
-vs2019.solutionfile = ../vc16/IshikoConfignTests.sln;
-vs2017.solutionfile = ../vc15/IshikoConfignTests.sln;
-vs2015.solutionfile = ../vc14/IshikoConfigTests.sln;
-vs2013.solutionfile = ../vc12/IshikoConfigTests.sln;
+vs2019.solutionfile = ../vc16/IshikoConfigurationTests.sln;
+vs2017.solutionfile = ../vc15/IshikoConfigurationTests.sln;
+vs2015.solutionfile = ../vc14/IshikoConfigurationTests.sln;
+vs2013.solutionfile = ../vc12/IshikoConfigurationTests.sln;
 
-program IshikoConfigTests : IshikoConfiguration, IshikoTestFrameworkCore
+program IshikoConfigurationTests : IshikoConfiguration, IshikoTestFrameworkCore
 {
     archs = x86 x86_64;
 
@@ -22,8 +22,8 @@ program IshikoConfigTests : IshikoConfiguration, IshikoTestFrameworkCore
 
     headers
     {
-        ../../src/CommandLineParserTests.h
-        ../../src/CommandLineSpecificationTests.h
+        ../../src/CommandLineParserTests.hpp
+        ../../src/CommandLineSpecificationTests.hpp
     }
 
     sources

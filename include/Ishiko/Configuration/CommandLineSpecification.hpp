@@ -1,18 +1,16 @@
 /*
-    Copyright (c) 2021 Xavier Leclercq
+    Copyright (c) 2021-2022 Xavier Leclercq
     Released under the MIT License
-    See https://github.com/ishiko-cpp/config/blob/main/LICENSE.txt
+    See https://github.com/ishiko-cpp/configuration/blob/main/LICENSE.txt
 */
 
-#ifndef _ISHIKO_CONFIGURATION_COMMANDLINESPECIFICATION_H_
-#define _ISHIKO_CONFIGURATION_COMMANDLINESPECIFICATION_H_
+#ifndef _ISHIKO_CONFIGURATION_COMMANDLINESPECIFICATION_HPP_
+#define _ISHIKO_CONFIGURATION_COMMANDLINESPECIFICATION_HPP_
 
 #include <map>
 #include <string>
 
 namespace Ishiko
-{
-namespace Configuration
 {
 
 class CommandLineSpecification
@@ -31,7 +29,6 @@ private:
     std::map<std::string, OptionDetails> m_options;
 };
 
-}
 }
 
 #endif

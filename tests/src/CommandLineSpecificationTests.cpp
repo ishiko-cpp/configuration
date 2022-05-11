@@ -1,14 +1,13 @@
 /*
     Copyright (c) 2021-2022 Xavier Leclercq
     Released under the MIT License
-    See https://github.com/ishiko-cpp/config/blob/main/LICENSE.txt
+    See https://github.com/ishiko-cpp/configuration/blob/main/LICENSE.txt
 */
 
-#include "CommandLineSpecificationTests.h"
-#include "Ishiko/Configuration/CommandLineSpecification.h"
+#include "CommandLineSpecificationTests.hpp"
+#include "Ishiko/Configuration/CommandLineSpecification.hpp"
 
 using namespace Ishiko;
-using namespace Ishiko::Configuration;
 
 CommandLineSpecificationTests::CommandLineSpecificationTests(const TestNumber& number, const TestContext& context)
     : TestSequence(number, "CommandLineSpecification tests", context)

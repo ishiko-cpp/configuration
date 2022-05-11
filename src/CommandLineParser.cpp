@@ -1,19 +1,13 @@
 /*
-    Copyright (c) 2021 Xavier Leclercq
+    Copyright (c) 2021-2022 Xavier Leclercq
     Released under the MIT License
-    See https://github.com/ishiko-cpp/config/blob/main/LICENSE.txt
+    See https://github.com/ishiko-cpp/configuration/blob/main/LICENSE.txt
 */
 
-#include "CommandLineParser.h"
+#include "CommandLineParser.hpp"
 
-namespace Ishiko
-{
-namespace Configuration
-{
+using namespace Ishiko;
 
 void CommandLineParser::parse(const CommandLineSpecification& specification, int argc, char* argv[])
 {
-}
-
-}
 }
