@@ -12,8 +12,6 @@ using namespace Ishiko;
 void CommandLineParser::parse(const CommandLineSpecification& specification, int argc, const char* argv[],
     Configuration& configuration)
 {
-    // TODO: use spec to initialize all option with appropriate defaults
-
     // The first argument is the executable so we ignore it
     for (int i = 1; i < argc; ++i)
     {
