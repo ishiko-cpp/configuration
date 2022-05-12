@@ -16,9 +16,25 @@ namespace Ishiko
 class CommandLineSpecification
 {
 public:
-    struct OptionDetails
+    enum class OptionType
     {
-        std::string defaultValue;
+        uninitialized,
+        singleValue,
+        toggle
+    };
+
+    class OptionDetails
+    {
+    public:
+        OptionDetails();
+        OptionDetails(OptionType type, std::string defaultValue);
+
+        OptionType type() const;
+        const std::string& defaultValue() const;
+
+    private:
+        OptionType m_type;
+        std::string m_defaultValue;
     };
 
     void addNamedOption(const std::string& name, const OptionDetails& details);

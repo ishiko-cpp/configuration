@@ -1,0 +1,29 @@
+/*
+    Copyright (c) 2022 Xavier Leclercq
+    Released under the MIT License
+    See https://github.com/ishiko-cpp/configuration/blob/main/LICENSE.txt
+*/
+
+#ifndef _ISHIKO_CONFIGURATION_CONFIGURATION_HPP_
+#define _ISHIKO_CONFIGURATION_CONFIGURATION_HPP_
+
+#include <map>
+#include <string>
+
+namespace Ishiko
+{
+
+class Configuration
+{
+public:
+    const std::string& value(const std::string& name) const;
+
+    void set(const std::string& name, const std::string& value);
+
+private:
+    std::map<std::string, std::string> m_options;
+};
+
+}
+
+#endif
