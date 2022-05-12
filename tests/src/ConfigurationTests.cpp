@@ -20,6 +20,7 @@ void ConfigurationTests::ConstructorTest1(Test& test)
 {
     Configuration configuration;
 
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 0);
     ISHIKO_TEST_PASS();
 }
 
@@ -29,6 +30,7 @@ void ConfigurationTests::SetTest1(Test& test)
 
     configuration.set("option1", "value1");
 
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 1);
     ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1"), "value1");
     ISHIKO_TEST_PASS();
 }

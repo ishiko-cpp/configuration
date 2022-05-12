@@ -28,6 +28,18 @@ const std::string& CommandLineSpecification::OptionDetails::defaultValue() const
     return m_defaultValue;
 }
 
+Configuration CommandLineSpecification::createDefaultConfiguration() const
+{
+    Configuration result;
+
+    for (const std::pair<std::string, OptionDetails>& option : m_options)
+    {
+        result.set(option.first, option.second.defaultValue());
+    }
+
+    return result;
+}
+
 void CommandLineSpecification::addNamedOption(const std::string& name, const OptionDetails& details)
 {
     m_options.emplace(name, details);
