@@ -24,12 +24,14 @@ program IshikoConfigurationTests : IshikoConfiguration, IshikoTestFrameworkCore
     {
         ../../src/CommandLineParserTests.hpp
         ../../src/CommandLineSpecificationTests.hpp
+        ../../src/ConfigurationTests.hpp
     }
 
     sources
     {
         ../../src/CommandLineParserTests.cpp
         ../../src/CommandLineSpecificationTests.cpp
+        ../../src/ConfigurationTests.cpp
         ../../src/main.cpp
     }
 }

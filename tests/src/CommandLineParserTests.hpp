@@ -4,8 +4,8 @@
     See https://github.com/ishiko-cpp/configuration/blob/main/LICENSE.txt
 */
 
-#ifndef _ISHIKO_CPP_CONFIGURATION_TEST_COMMANDLINEPARSERTESTS_HPP_
-#define _ISHIKO_CPP_CONFIGURATION_TEST_COMMANDLINEPARSERTESTS_HPP_
+#ifndef _ISHIKO_CPP_CONFIGURATION_TESTS_COMMANDLINEPARSERTESTS_HPP_
+#define _ISHIKO_CPP_CONFIGURATION_TESTS_COMMANDLINEPARSERTESTS_HPP_
 
 #include <Ishiko/TestFramework/Core.hpp>
 
@@ -16,6 +16,9 @@ public:
 
 private:
     static void ConstructorTest1(Ishiko::Test& test);
+    static void ParseTest1(Ishiko::Test& test);
+    static void ParseTest2(Ishiko::Test& test);
+    static void ParseTest3(Ishiko::Test& test);
 };
 
 #endif
