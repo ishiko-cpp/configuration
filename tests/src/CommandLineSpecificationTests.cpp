@@ -14,6 +14,9 @@ CommandLineSpecificationTests::CommandLineSpecificationTests(const TestNumber& n
 {
     append<HeapAllocationErrorsTest>("Constructor test 1", ConstructorTest1);
     append<HeapAllocationErrorsTest>("addNamedOption test 1", AddNamedOptionTest1);
+    append<HeapAllocationErrorsTest>("createDefaultConfiguration test 1", CreateDefaultConfigurationTest1);
+    append<HeapAllocationErrorsTest>("createDefaultConfiguration test 2", CreateDefaultConfigurationTest2);
+    append<HeapAllocationErrorsTest>("createDefaultConfiguration test 3", CreateDefaultConfigurationTest3);
 }
 
 void CommandLineSpecificationTests::ConstructorTest1(Test& test)
@@ -34,5 +37,41 @@ void CommandLineSpecificationTests::AddNamedOptionTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF_NOT(found);
     ISHIKO_TEST_FAIL_IF_NEQ(details.defaultValue(), "default");
+    ISHIKO_TEST_PASS();
+}
+
+void CommandLineSpecificationTests::CreateDefaultConfigurationTest1(Test& test)
+{
+    CommandLineSpecification spec;
+
+    Configuration configuration = spec.createDefaultConfiguration();
+
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 0);
+    ISHIKO_TEST_PASS();
+}
+
+void CommandLineSpecificationTests::CreateDefaultConfigurationTest2(Test& test)
+{
+    CommandLineSpecification spec;
+    spec.addNamedOption("option1", { CommandLineSpecification::OptionType::singleValue, "default" });
+
+    Configuration configuration = spec.createDefaultConfiguration();
+
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 1);
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1"), "default");
+    ISHIKO_TEST_PASS();
+}
+
+void CommandLineSpecificationTests::CreateDefaultConfigurationTest3(Test& test)
+{
+    CommandLineSpecification spec;
+    spec.addNamedOption("option1", { CommandLineSpecification::OptionType::singleValue, "default" });
+    spec.addNamedOption("option2", { CommandLineSpecification::OptionType::toggle, "true" });
+
+    Configuration configuration = spec.createDefaultConfiguration();
+
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 2);
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1"), "default");
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option2"), "true");
     ISHIKO_TEST_PASS();
 }

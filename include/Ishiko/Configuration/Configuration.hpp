@@ -16,6 +16,8 @@ namespace Ishiko
 class Configuration
 {
 public:
+    size_t size() const;
+
     const std::string& value(const std::string& name) const;
 
     void set(const std::string& name, const std::string& value);

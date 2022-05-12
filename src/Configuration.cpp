@@ -8,6 +8,11 @@
 
 using namespace Ishiko;
 
+size_t Configuration::size() const
+{
+    return m_options.size();
+}
+
 const std::string& Configuration::value(const std::string& name) const
 {
     return m_options.at(name);

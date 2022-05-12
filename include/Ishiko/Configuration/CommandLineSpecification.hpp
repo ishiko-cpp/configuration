@@ -7,6 +7,7 @@
 #ifndef _ISHIKO_CONFIGURATION_COMMANDLINESPECIFICATION_HPP_
 #define _ISHIKO_CONFIGURATION_COMMANDLINESPECIFICATION_HPP_
 
+#include "Configuration.hpp"
 #include <map>
 #include <string>
 
@@ -36,6 +37,8 @@ public:
         OptionType m_type;
         std::string m_defaultValue;
     };
+
+    Configuration createDefaultConfiguration() const;
 
     void addNamedOption(const std::string& name, const OptionDetails& details);
 
