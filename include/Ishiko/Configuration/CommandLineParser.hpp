@@ -8,6 +8,7 @@
 #define _ISHIKO_CONFIGURATION_COMMANDLINEPARSER_HPP_
 
 #include "CommandLineSpecification.hpp"
+#include "Configuration.hpp"
 
 namespace Ishiko
 {
@@ -15,7 +16,10 @@ namespace Ishiko
 class CommandLineParser
 {
 public:
-    static void parse(const CommandLineSpecification& specification, int argc, char* argv[]);
+    static void parse(const CommandLineSpecification& specification, int argc, const char* argv[],
+        Configuration& configuration);
+    static void parse(const CommandLineSpecification& specification, int argc, char* argv[],
+        Configuration& configuration);
 };
 
 }
