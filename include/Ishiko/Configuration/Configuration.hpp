@@ -20,6 +20,7 @@ public:
 
     const std::string& value(const std::string& name) const;
     const std::string& valueOrDefault(const std::string& name, const std::string& defaultValue) const noexcept;
+    const std::string* valueOrNull(const std::string& name) const noexcept;
 
     void set(const std::string& name, const std::string& value);
 

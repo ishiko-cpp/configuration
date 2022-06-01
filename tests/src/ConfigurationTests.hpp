@@ -18,6 +18,7 @@ private:
     static void ConstructorTest1(Ishiko::Test& test);
     static void SetTest1(Ishiko::Test& test);
     static void ValueOrDefaultTest1(Ishiko::Test& test);
+    static void ValueOrNullTest1(Ishiko::Test& test);
 };
 
 #endif

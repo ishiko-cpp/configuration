@@ -15,6 +15,7 @@ ConfigurationTests::ConfigurationTests(const TestNumber& number, const TestConte
     append<HeapAllocationErrorsTest>("Constructor test 1", ConstructorTest1);
     append<HeapAllocationErrorsTest>("set test 1", SetTest1);
     append<HeapAllocationErrorsTest>("valueOrDefault test 1", ValueOrDefaultTest1);
+    append<HeapAllocationErrorsTest>("valueOrNull test 1", ValueOrNullTest1);
 }
 
 void ConfigurationTests::ConstructorTest1(Test& test)
@@ -45,5 +46,24 @@ void ConfigurationTests::ValueOrDefaultTest1(Test& test)
     ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 1);
     ISHIKO_TEST_FAIL_IF_NEQ(configuration.valueOrDefault("option1", "default1"), "value1");
     ISHIKO_TEST_FAIL_IF_NEQ(configuration.valueOrDefault("option2", "default2"), "default2");
+    ISHIKO_TEST_PASS();
+}
+
+void ConfigurationTests::ValueOrNullTest1(Test& test)
+{
+    Configuration configuration;
+
+    configuration.set("option1", "value1");
+
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 1);
+
+    const std::string* valuePointer1 = configuration.valueOrNull("option1");
+
+    ISHIKO_TEST_ABORT_IF_EQ(valuePointer1, nullptr);
+    ISHIKO_TEST_FAIL_IF_NEQ(*valuePointer1, "value1");
+
+    const std::string* valuePointer2 = configuration.valueOrNull("option2");
+
+    ISHIKO_TEST_FAIL_IF_NEQ(valuePointer2, nullptr);
     ISHIKO_TEST_PASS();
 }
