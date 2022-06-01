@@ -19,6 +19,7 @@ public:
     size_t size() const;
 
     const std::string& value(const std::string& name) const;
+    const std::string& valueOrDefault(const std::string& name, const std::string& defaultValue) const noexcept;
 
     void set(const std::string& name, const std::string& value);
 

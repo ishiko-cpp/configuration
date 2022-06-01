@@ -14,6 +14,7 @@ ConfigurationTests::ConfigurationTests(const TestNumber& number, const TestConte
 {
     append<HeapAllocationErrorsTest>("Constructor test 1", ConstructorTest1);
     append<HeapAllocationErrorsTest>("set test 1", SetTest1);
+    append<HeapAllocationErrorsTest>("valueOrDefault test 1", ValueOrDefaultTest1);
 }
 
 void ConfigurationTests::ConstructorTest1(Test& test)
@@ -32,5 +33,17 @@ void ConfigurationTests::SetTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 1);
     ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1"), "value1");
+    ISHIKO_TEST_PASS();
+}
+
+void ConfigurationTests::ValueOrDefaultTest1(Test& test)
+{
+    Configuration configuration;
+
+    configuration.set("option1", "value1");
+
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 1);
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.valueOrDefault("option1", "default1"), "value1");
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.valueOrDefault("option2", "default2"), "default2");
     ISHIKO_TEST_PASS();
 }
