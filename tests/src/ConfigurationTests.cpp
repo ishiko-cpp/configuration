@@ -26,6 +26,7 @@ void ConfigurationTests::ValueConstructorTest1(Test& test)
     Configuration::Value value;
 
     ISHIKO_TEST_FAIL_IF_NEQ(value.type(), Configuration::Value::Type::string);
+    ISHIKO_TEST_FAIL_IF_NEQ(value.asString(), "");
     ISHIKO_TEST_PASS();
 }
 
@@ -34,6 +35,7 @@ void ConfigurationTests::ValueConstructorTest2(Test& test)
     Configuration::Value value("text");
 
     ISHIKO_TEST_FAIL_IF_NEQ(value.type(), Configuration::Value::Type::string);
+    ISHIKO_TEST_FAIL_IF_NEQ(value.asString(), "text");
     ISHIKO_TEST_PASS();
 }
 
@@ -42,6 +44,7 @@ void ConfigurationTests::ValueConstructorTest3(Test& test)
     Configuration::Value value(std::vector<std::string>({ "item1", "item2" }));
 
     ISHIKO_TEST_FAIL_IF_NEQ(value.type(), Configuration::Value::Type::stringArray);
+    ISHIKO_TEST_FAIL_IF_NEQ(value.asStringArray(), std::vector<std::string>({ "item1", "item2" }));
     ISHIKO_TEST_PASS();
 }
 

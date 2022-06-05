@@ -33,6 +33,8 @@ public:
         Value(const std::vector<std::string>& value);
 
         Type type() const;
+        const std::string& asString() const;
+        const std::vector<std::string>& asStringArray() const;
     };
 
     size_t size() const;

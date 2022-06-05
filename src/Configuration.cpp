@@ -28,6 +28,16 @@ Configuration::Value::Type Configuration::Value::type() const
     return static_cast<Configuration::Value::Type>(which());
 }
 
+const std::string& Configuration::Value::asString() const
+{
+    return boost::get<std::string>(*this);
+}
+
+const std::vector<std::string>& Configuration::Value::asStringArray() const
+{
+    return boost::get<std::vector<std::string>>(*this);
+}
+
 size_t Configuration::size() const
 {
     return m_options.size();
