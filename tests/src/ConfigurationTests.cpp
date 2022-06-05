@@ -6,6 +6,8 @@
 
 #include "ConfigurationTests.hpp"
 #include "Ishiko/Configuration/Configuration.hpp"
+#include <vector>
+#include <string>
 
 using namespace Ishiko;
 
@@ -18,6 +20,7 @@ ConfigurationTests::ConfigurationTests(const TestNumber& number, const TestConte
     append<HeapAllocationErrorsTest>("Value constructor test 4", ValueConstructorTest4);
     append<HeapAllocationErrorsTest>("Constructor test 1", ConstructorTest1);
     append<HeapAllocationErrorsTest>("set test 1", SetTest1);
+    append<HeapAllocationErrorsTest>("set test 2", SetTest2);
     append<HeapAllocationErrorsTest>("valueOrDefault test 1", ValueOrDefaultTest1);
     append<HeapAllocationErrorsTest>("valueOrNull test 1", ValueOrNullTest1);
 }
@@ -74,6 +77,18 @@ void ConfigurationTests::SetTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 1);
     ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1").asString(), "value1");
+    ISHIKO_TEST_PASS();
+}
+
+void ConfigurationTests::SetTest2(Test& test)
+{
+    Configuration configuration;
+
+    configuration.set("option1", std::vector<std::string>({ "value1", "value2" }));
+
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 1);
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1").asStringArray(),
+        std::vector<std::string>({ "value1", "value2" }));
     ISHIKO_TEST_PASS();
 }
 

@@ -80,7 +80,7 @@ const std::string* Configuration::valueOrNull(const std::string& name) const noe
     }
 }
 
-void Configuration::set(const std::string& name, const std::string& value)
+void Configuration::set(const std::string& name, const Value& value)
 {
     m_options[name] = value;
 }

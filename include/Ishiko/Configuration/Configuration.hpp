@@ -44,7 +44,7 @@ public:
     const Value& valueOrDefault(const std::string& name, const Value& defaultValue) const noexcept;
     const std::string* valueOrNull(const std::string& name) const noexcept;
 
-    void set(const std::string& name, const std::string& value);
+    void set(const std::string& name, const Value& value);
 
 private:
     std::map<std::string, Value> m_options;
