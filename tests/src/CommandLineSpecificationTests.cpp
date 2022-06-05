@@ -58,7 +58,7 @@ void CommandLineSpecificationTests::CreateDefaultConfigurationTest2(Test& test)
     Configuration configuration = spec.createDefaultConfiguration();
 
     ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 1);
-    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1"), "default");
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1").asString(), "default");
     ISHIKO_TEST_PASS();
 }
 
@@ -71,7 +71,7 @@ void CommandLineSpecificationTests::CreateDefaultConfigurationTest3(Test& test)
     Configuration configuration = spec.createDefaultConfiguration();
 
     ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 2);
-    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1"), "default");
-    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option2"), "true");
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1").asString(), "default");
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option2").asString(), "true");
     ISHIKO_TEST_PASS();
 }

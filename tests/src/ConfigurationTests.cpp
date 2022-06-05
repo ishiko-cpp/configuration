@@ -15,6 +15,7 @@ ConfigurationTests::ConfigurationTests(const TestNumber& number, const TestConte
     append<HeapAllocationErrorsTest>("Value constructor test 1", ValueConstructorTest1);
     append<HeapAllocationErrorsTest>("Value constructor test 2", ValueConstructorTest2);
     append<HeapAllocationErrorsTest>("Value constructor test 3", ValueConstructorTest3);
+    append<HeapAllocationErrorsTest>("Value constructor test 4", ValueConstructorTest4);
     append<HeapAllocationErrorsTest>("Constructor test 1", ConstructorTest1);
     append<HeapAllocationErrorsTest>("set test 1", SetTest1);
     append<HeapAllocationErrorsTest>("valueOrDefault test 1", ValueOrDefaultTest1);
@@ -41,6 +42,15 @@ void ConfigurationTests::ValueConstructorTest2(Test& test)
 
 void ConfigurationTests::ValueConstructorTest3(Test& test)
 {
+    Configuration::Value value(std::string("text"));
+
+    ISHIKO_TEST_FAIL_IF_NEQ(value.type(), Configuration::Value::Type::string);
+    ISHIKO_TEST_FAIL_IF_NEQ(value.asString(), "text");
+    ISHIKO_TEST_PASS();
+}
+
+void ConfigurationTests::ValueConstructorTest4(Test& test)
+{
     Configuration::Value value(std::vector<std::string>({ "item1", "item2" }));
 
     ISHIKO_TEST_FAIL_IF_NEQ(value.type(), Configuration::Value::Type::stringArray);
@@ -63,7 +73,7 @@ void ConfigurationTests::SetTest1(Test& test)
     configuration.set("option1", "value1");
 
     ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 1);
-    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1"), "value1");
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1").asString(), "value1");
     ISHIKO_TEST_PASS();
 }
 
@@ -74,8 +84,8 @@ void ConfigurationTests::ValueOrDefaultTest1(Test& test)
     configuration.set("option1", "value1");
 
     ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 1);
-    ISHIKO_TEST_FAIL_IF_NEQ(configuration.valueOrDefault("option1", "default1"), "value1");
-    ISHIKO_TEST_FAIL_IF_NEQ(configuration.valueOrDefault("option2", "default2"), "default2");
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.valueOrDefault("option1", "default1").asString(), "value1");
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.valueOrDefault("option2", "default2").asString(), "default2");
     ISHIKO_TEST_PASS();
 }
 

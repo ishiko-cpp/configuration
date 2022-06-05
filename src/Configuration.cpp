@@ -8,6 +8,11 @@
 
 using namespace Ishiko;
 
+Configuration::Value::Value(const char* value)
+    : boost::variant<std::string, std::vector<std::string>>(value)
+{
+}
+
 Configuration::Value::Value(const std::string& value)
     : boost::variant<std::string, std::vector<std::string>>(value)
 {
@@ -43,18 +48,18 @@ size_t Configuration::size() const
     return m_options.size();
 }
 
-const std::string& Configuration::value(const std::string& name) const
+const Configuration::Value& Configuration::value(const std::string& name) const
 {
-    return boost::get<std::string>(m_options.at(name));
+    return m_options.at(name);
 }
 
-const std::string& Configuration::valueOrDefault(const std::string& name,
-    const std::string& defaultValue) const noexcept
+const Configuration::Value& Configuration::valueOrDefault(const std::string& name,
+    const Value& defaultValue) const noexcept
 {
     std::map<std::string, Value>::const_iterator  it = m_options.find(name);
     if (it != m_options.end())
     {
-        return boost::get<std::string>(it->second);
+        return it->second;
     }
     else
     {

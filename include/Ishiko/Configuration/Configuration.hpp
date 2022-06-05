@@ -28,6 +28,7 @@ public:
         };
 
         Value() = default;
+        Value(const char* value);
         Value(const std::string& value);
         Value(std::string&& value);
         Value(const std::vector<std::string>& value);
@@ -39,8 +40,8 @@ public:
 
     size_t size() const;
 
-    const std::string& value(const std::string& name) const;
-    const std::string& valueOrDefault(const std::string& name, const std::string& defaultValue) const noexcept;
+    const Value& value(const std::string& name) const;
+    const Value& valueOrDefault(const std::string& name, const Value& defaultValue) const noexcept;
     const std::string* valueOrNull(const std::string& name) const noexcept;
 
     void set(const std::string& name, const std::string& value);

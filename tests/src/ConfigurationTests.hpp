@@ -18,6 +18,7 @@ private:
     static void ValueConstructorTest1(Ishiko::Test& test);
     static void ValueConstructorTest2(Ishiko::Test& test);
     static void ValueConstructorTest3(Ishiko::Test& test);
+    static void ValueConstructorTest4(Ishiko::Test& test);
     static void ConstructorTest1(Ishiko::Test& test);
     static void SetTest1(Ishiko::Test& test);
     static void ValueOrDefaultTest1(Ishiko::Test& test);
