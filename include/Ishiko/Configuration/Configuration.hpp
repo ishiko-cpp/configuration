@@ -42,7 +42,7 @@ public:
 
     const Value& value(const std::string& name) const;
     const Value& valueOrDefault(const std::string& name, const Value& defaultValue) const noexcept;
-    const std::string* valueOrNull(const std::string& name) const noexcept;
+    const Value* valueOrNull(const std::string& name) const noexcept;
 
     void set(const std::string& name, const Value& value);
 

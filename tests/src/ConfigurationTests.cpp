@@ -129,12 +129,12 @@ void ConfigurationTests::ValueOrNullTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 1);
 
-    const std::string* valuePointer1 = configuration.valueOrNull("option1");
+    const Configuration::Value* valuePointer1 = configuration.valueOrNull("option1");
 
     ISHIKO_TEST_ABORT_IF_EQ(valuePointer1, nullptr);
-    ISHIKO_TEST_FAIL_IF_NEQ(*valuePointer1, "value1");
+    ISHIKO_TEST_FAIL_IF_NEQ(valuePointer1->asString(), "value1");
 
-    const std::string* valuePointer2 = configuration.valueOrNull("option2");
+    const Configuration::Value* valuePointer2 = configuration.valueOrNull("option2");
 
     ISHIKO_TEST_FAIL_IF_NEQ(valuePointer2, nullptr);
     ISHIKO_TEST_PASS();

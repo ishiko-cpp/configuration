@@ -67,12 +67,12 @@ const Configuration::Value& Configuration::valueOrDefault(const std::string& nam
     }
 }
 
-const std::string* Configuration::valueOrNull(const std::string& name) const noexcept
+const Configuration::Value* Configuration::valueOrNull(const std::string& name) const noexcept
 {
     std::map<std::string, Value>::const_iterator it = m_options.find(name);
     if (it != m_options.end())
     {
-        return &boost::get<std::string>(it->second);
+        return &it->second;
     }
     else
     {
