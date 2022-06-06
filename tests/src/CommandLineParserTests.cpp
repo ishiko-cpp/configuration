@@ -36,7 +36,7 @@ void CommandLineParserTests::ParseTest1(Test& test)
     Configuration configuration;
     parser.parse(spec, argc, argv, configuration);
 
-    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1"), "value1");
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1").asString(), "value1");
     ISHIKO_TEST_PASS();
 }
 
@@ -51,8 +51,8 @@ void CommandLineParserTests::ParseTest2(Test& test)
     Configuration configuration;
     parser.parse(spec, argc, argv, configuration);
 
-    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1"), "value1");
-    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option2"), "value2");
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1").asString(), "value1");
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option2").asString(), "value2");
     ISHIKO_TEST_PASS();
 }
 
@@ -66,6 +66,6 @@ void CommandLineParserTests::ParseTest3(Test& test)
     Configuration configuration;
     parser.parse(spec, argc, argv, configuration);
 
-    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1"), "");
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1").asString(), "");
     ISHIKO_TEST_PASS();
 }

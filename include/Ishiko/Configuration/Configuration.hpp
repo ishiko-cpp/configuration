@@ -7,8 +7,10 @@
 #ifndef _ISHIKO_CONFIGURATION_CONFIGURATION_HPP_
 #define _ISHIKO_CONFIGURATION_CONFIGURATION_HPP_
 
+#include <boost/variant.hpp>
 #include <map>
 #include <string>
+#include <vector>
 
 namespace Ishiko
 {
@@ -16,16 +18,36 @@ namespace Ishiko
 class Configuration
 {
 public:
+    class Value : public boost::variant<std::string, std::vector<std::string>>
+    {
+    public:
+        enum class Type
+        {
+            string = 0,
+            stringArray = 1
+        };
+
+        Value() = default;
+        Value(const char* value);
+        Value(const std::string& value);
+        Value(std::string&& value);
+        Value(const std::vector<std::string>& value);
+
+        Type type() const;
+        const std::string& asString() const;
+        const std::vector<std::string>& asStringArray() const;
+    };
+
     size_t size() const;
 
-    const std::string& value(const std::string& name) const;
-    const std::string& valueOrDefault(const std::string& name, const std::string& defaultValue) const noexcept;
-    const std::string* valueOrNull(const std::string& name) const noexcept;
+    const Value& value(const std::string& name) const;
+    const Value& valueOrDefault(const std::string& name, const Value& defaultValue) const noexcept;
+    const Value* valueOrNull(const std::string& name) const noexcept;
 
-    void set(const std::string& name, const std::string& value);
+    void set(const std::string& name, const Value& value);
 
 private:
-    std::map<std::string, std::string> m_options;
+    std::map<std::string, Value> m_options;
 };
 
 }
