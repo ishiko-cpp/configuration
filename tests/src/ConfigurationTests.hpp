@@ -27,6 +27,7 @@ private:
     static void SetTest5(Ishiko::Test& test);
     static void ValueOrDefaultTest1(Ishiko::Test& test);
     static void ValueOrDefaultTest2(Ishiko::Test& test);
+    static void ValueOrDefaultTest3(Ishiko::Test& test);
     static void ValueOrNullTest1(Ishiko::Test& test);
 };
 

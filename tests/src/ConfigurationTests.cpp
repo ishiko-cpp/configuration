@@ -26,6 +26,7 @@ ConfigurationTests::ConfigurationTests(const TestNumber& number, const TestConte
     append<HeapAllocationErrorsTest>("set test 5", SetTest5);
     append<HeapAllocationErrorsTest>("valueOrDefault test 1", ValueOrDefaultTest1);
     append<HeapAllocationErrorsTest>("valueOrDefault test 2", ValueOrDefaultTest2);
+    append<HeapAllocationErrorsTest>("valueOrDefault test 3", ValueOrDefaultTest3);
     append<HeapAllocationErrorsTest>("valueOrNull test 1", ValueOrNullTest1);
 }
 
@@ -163,11 +164,12 @@ void ConfigurationTests::ValueOrDefaultTest1(Test& test)
 {
     Configuration configuration;
 
+    const std::string defaultValue = "default";
     configuration.set("option1", "value1");
 
     ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 1);
-    ISHIKO_TEST_FAIL_IF_NEQ(configuration.valueOrDefault("option1", "default1").asString(), "value1");
-    ISHIKO_TEST_FAIL_IF_NEQ(configuration.valueOrDefault("option2", "default2").asString(), "default2");
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.valueOrDefault("option1", defaultValue), "value1");
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.valueOrDefault("option2", defaultValue), "default");
     ISHIKO_TEST_PASS();
 }
 
@@ -175,15 +177,33 @@ void ConfigurationTests::ValueOrDefaultTest2(Test& test)
 {
     Configuration configuration;
 
+    const std::vector<std::string> defaultValue = std::vector<std::string>({ "default" });
     configuration.set("option1", std::vector<std::string>({ "value1", "value2" }));
 
     ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 1);
-    ISHIKO_TEST_FAIL_IF_NEQ(
-        configuration.valueOrDefault("option1", std::vector<std::string>({ "value3" })).asStringArray(),
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.valueOrDefault("option1", defaultValue),
         std::vector<std::string>({ "value1", "value2" }));
-    ISHIKO_TEST_FAIL_IF_NEQ(
-        configuration.valueOrDefault("option2", std::vector<std::string>({ "value3" })).asStringArray(),
-        std::vector<std::string>({ "value3" }));
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.valueOrDefault("option2", defaultValue),
+        std::vector<std::string>({ "default" }));
+    ISHIKO_TEST_PASS();
+}
+
+void ConfigurationTests::ValueOrDefaultTest3(Test& test)
+{
+    Configuration configuration;
+
+    Configuration defaultValue;
+    defaultValue.set("name", "John");
+    configuration.set("option1", Configuration());
+
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 1);
+
+    const Configuration& returnedConfiguration1 = configuration.valueOrDefault("option1", defaultValue);
+    const Configuration& returnedConfiguration2 = configuration.valueOrDefault("option2", defaultValue);
+
+    ISHIKO_TEST_FAIL_IF_NEQ(returnedConfiguration1.size(), 0);
+    ISHIKO_TEST_ABORT_IF_NEQ(returnedConfiguration2.size(), 1);
+    ISHIKO_TEST_FAIL_IF_NEQ(returnedConfiguration2.value("name").asString(), "John");
     ISHIKO_TEST_PASS();
 }
 

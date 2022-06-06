@@ -30,11 +30,11 @@ public:
         };
 
         Value() = default;
-        Value(const char* value);
-        Value(const std::string& value);
-        Value(std::string&& value);
-        Value(const std::vector<std::string>& value);
-        Value(const Configuration& value);
+        explicit Value(const char* value);
+        explicit Value(const std::string& value);
+        explicit Value(std::string&& value);
+        explicit Value(const std::vector<std::string>& value);
+        explicit Value(const Configuration& value);
 
         Type type() const;
         const std::string& asString() const;
@@ -45,9 +45,15 @@ public:
     size_t size() const;
 
     const Value& value(const std::string& name) const;
-    const Value& valueOrDefault(const std::string& name, const Value& defaultValue) const noexcept;
+    const std::string& valueOrDefault(const std::string& name, const std::string& defaultValue) const noexcept;
+    const std::vector<std::string>& valueOrDefault(const std::string& name,
+        const std::vector<std::string>& defaultValue) const noexcept;
+    const Configuration& valueOrDefault(const std::string& name, const Configuration& defaultValue) const noexcept;
     const Value* valueOrNull(const std::string& name) const noexcept;
 
+    void set(const std::string& name, const std::string& value);
+    void set(const std::string& name, const std::vector<std::string>& value);
+    void set(const std::string& name, const Configuration& value);
     void set(const std::string& name, const Value& value);
 
 private:

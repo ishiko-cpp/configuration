@@ -63,13 +63,41 @@ const Configuration::Value& Configuration::value(const std::string& name) const
     return m_options.at(name);
 }
 
-const Configuration::Value& Configuration::valueOrDefault(const std::string& name,
-    const Value& defaultValue) const noexcept
+const std::string& Configuration::valueOrDefault(const std::string& name,
+    const std::string& defaultValue) const noexcept
 {
-    std::map<std::string, Value>::const_iterator  it = m_options.find(name);
+    std::map<std::string, Value>::const_iterator it = m_options.find(name);
     if (it != m_options.end())
     {
-        return it->second;
+        return it->second.asString();
+    }
+    else
+    {
+        return defaultValue;
+    }
+}
+
+const std::vector<std::string>& Configuration::valueOrDefault(const std::string& name,
+    const std::vector<std::string>& defaultValue) const noexcept
+{
+    std::map<std::string, Value>::const_iterator it = m_options.find(name);
+    if (it != m_options.end())
+    {
+        return it->second.asStringArray();
+    }
+    else
+    {
+        return defaultValue;
+    }
+}
+
+const Configuration& Configuration::valueOrDefault(const std::string& name,
+    const Configuration& defaultValue) const noexcept
+{
+    std::map<std::string, Value>::const_iterator it = m_options.find(name);
+    if (it != m_options.end())
+    {
+        return it->second.asConfiguration();
     }
     else
     {
@@ -88,6 +116,21 @@ const Configuration::Value* Configuration::valueOrNull(const std::string& name) 
     {
         return nullptr;
     }
+}
+
+void Configuration::set(const std::string& name, const std::string& value)
+{
+    m_options[name] = Value(value);
+}
+
+void Configuration::set(const std::string& name, const std::vector<std::string>& value)
+{
+    m_options[name] = Value(value);
+}
+
+void Configuration::set(const std::string& name, const Configuration& value)
+{
+    m_options[name] = Value(value);
 }
 
 void Configuration::set(const std::string& name, const Value& value)
