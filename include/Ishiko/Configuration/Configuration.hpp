@@ -9,6 +9,7 @@
 
 #include <boost/variant.hpp>
 #include <map>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -18,13 +19,14 @@ namespace Ishiko
 class Configuration
 {
 public:
-    class Value : public boost::variant<std::string, std::vector<std::string>>
+    class Value : public boost::variant<std::string, std::vector<std::string>, boost::recursive_wrapper<Configuration>>
     {
     public:
         enum class Type
         {
             string = 0,
-            stringArray = 1
+            stringArray = 1,
+            configuration = 2,
         };
 
         Value() = default;
@@ -32,10 +34,12 @@ public:
         Value(const std::string& value);
         Value(std::string&& value);
         Value(const std::vector<std::string>& value);
+        Value(const Configuration& value);
 
         Type type() const;
         const std::string& asString() const;
         const std::vector<std::string>& asStringArray() const;
+        const Configuration& asConfiguration() const;
     };
 
     size_t size() const;

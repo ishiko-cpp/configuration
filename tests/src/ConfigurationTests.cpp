@@ -21,6 +21,7 @@ ConfigurationTests::ConfigurationTests(const TestNumber& number, const TestConte
     append<HeapAllocationErrorsTest>("Constructor test 1", ConstructorTest1);
     append<HeapAllocationErrorsTest>("set test 1", SetTest1);
     append<HeapAllocationErrorsTest>("set test 2", SetTest2);
+    append<HeapAllocationErrorsTest>("set test 3", SetTest3);
     append<HeapAllocationErrorsTest>("valueOrDefault test 1", ValueOrDefaultTest1);
     append<HeapAllocationErrorsTest>("valueOrDefault test 2", ValueOrDefaultTest2);
     append<HeapAllocationErrorsTest>("valueOrNull test 1", ValueOrNullTest1);
@@ -77,6 +78,7 @@ void ConfigurationTests::SetTest1(Test& test)
     configuration.set("option1", "value1");
 
     ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 1);
+    ISHIKO_TEST_ABORT_IF_NEQ(configuration.value("option1").type(), Configuration::Value::Type::string);
     ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1").asString(), "value1");
     ISHIKO_TEST_PASS();
 }
@@ -88,8 +90,24 @@ void ConfigurationTests::SetTest2(Test& test)
     configuration.set("option1", std::vector<std::string>({ "value1", "value2" }));
 
     ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 1);
+    ISHIKO_TEST_ABORT_IF_NEQ(configuration.value("option1").type(), Configuration::Value::Type::stringArray);
     ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1").asStringArray(),
         std::vector<std::string>({ "value1", "value2" }));
+    ISHIKO_TEST_PASS();
+}
+
+void ConfigurationTests::SetTest3(Test& test)
+{
+    Configuration configuration;
+
+    configuration.set("option1", Configuration());
+
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 1);
+    ISHIKO_TEST_ABORT_IF_NEQ(configuration.value("option1").type(), Configuration::Value::Type::configuration);
+
+    const Configuration& returnedConfiguration = configuration.value("option1").asConfiguration();
+
+    ISHIKO_TEST_FAIL_IF_NEQ(returnedConfiguration.size(), 0);
     ISHIKO_TEST_PASS();
 }
 

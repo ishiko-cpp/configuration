@@ -9,22 +9,27 @@
 using namespace Ishiko;
 
 Configuration::Value::Value(const char* value)
-    : boost::variant<std::string, std::vector<std::string>>(value)
+    : boost::variant<std::string, std::vector<std::string>, boost::recursive_wrapper<Configuration>>(value)
 {
 }
 
 Configuration::Value::Value(const std::string& value)
-    : boost::variant<std::string, std::vector<std::string>>(value)
+    : boost::variant<std::string, std::vector<std::string>, boost::recursive_wrapper<Configuration>>(value)
 {
 }
 
 Configuration::Value::Value(std::string&& value)
-    : boost::variant<std::string, std::vector<std::string>>(value)
+    : boost::variant<std::string, std::vector<std::string>, boost::recursive_wrapper<Configuration>>(value)
 {
 }
 
 Configuration::Value::Value(const std::vector<std::string>& value)
-    : boost::variant<std::string, std::vector<std::string>>(value)
+    : boost::variant<std::string, std::vector<std::string>, boost::recursive_wrapper<Configuration>>(value)
+{
+}
+
+Configuration::Value::Value(const Configuration& value)
+    : boost::variant<std::string, std::vector<std::string>, boost::recursive_wrapper<Configuration>>(value)
 {
 }
 
@@ -41,6 +46,11 @@ const std::string& Configuration::Value::asString() const
 const std::vector<std::string>& Configuration::Value::asStringArray() const
 {
     return boost::get<std::vector<std::string>>(*this);
+}
+
+const Configuration& Configuration::Value::asConfiguration() const
+{
+    return boost::get<Configuration>(*this);
 }
 
 size_t Configuration::size() const
