@@ -13,6 +13,11 @@ CommandLineSpecification::OptionDetails::OptionDetails()
 {
 }
 
+CommandLineSpecification::OptionDetails::OptionDetails(OptionType type)
+    : m_type(type)
+{
+}
+
 CommandLineSpecification::OptionDetails::OptionDetails(OptionType type, std::string defaultValue)
     : m_type(type), m_defaultValue(std::move(defaultValue))
 {

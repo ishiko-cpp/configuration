@@ -29,6 +29,7 @@ public:
     {
     public:
         OptionDetails();
+        OptionDetails(OptionType type);
         OptionDetails(OptionType type, std::string defaultValue);
 
         OptionType type() const noexcept;

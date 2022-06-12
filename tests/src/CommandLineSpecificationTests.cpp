@@ -14,9 +14,11 @@ CommandLineSpecificationTests::CommandLineSpecificationTests(const TestNumber& n
 {
     append<HeapAllocationErrorsTest>("Constructor test 1", ConstructorTest1);
     append<HeapAllocationErrorsTest>("addNamedOption test 1", AddNamedOptionTest1);
+    append<HeapAllocationErrorsTest>("addNamedOption test 2", AddNamedOptionTest2);
     append<HeapAllocationErrorsTest>("createDefaultConfiguration test 1", CreateDefaultConfigurationTest1);
     append<HeapAllocationErrorsTest>("createDefaultConfiguration test 2", CreateDefaultConfigurationTest2);
     append<HeapAllocationErrorsTest>("createDefaultConfiguration test 3", CreateDefaultConfigurationTest3);
+    append<HeapAllocationErrorsTest>("createDefaultConfiguration test 4", CreateDefaultConfigurationTest4);
 }
 
 void CommandLineSpecificationTests::ConstructorTest1(Test& test)
@@ -27,6 +29,20 @@ void CommandLineSpecificationTests::ConstructorTest1(Test& test)
 }
 
 void CommandLineSpecificationTests::AddNamedOptionTest1(Test& test)
+{
+    CommandLineSpecification spec;
+
+    spec.addNamedOption("option1", { CommandLineSpecification::OptionType::singleValue });
+
+    CommandLineSpecification::OptionDetails details;
+    bool found = spec.find("option1", details);
+
+    ISHIKO_TEST_FAIL_IF_NOT(found);
+    ISHIKO_TEST_FAIL_IF(details.defaultValue().has_value());
+    ISHIKO_TEST_PASS();
+}
+
+void CommandLineSpecificationTests::AddNamedOptionTest2(Test& test)
 {
     CommandLineSpecification spec;
 
@@ -54,6 +70,17 @@ void CommandLineSpecificationTests::CreateDefaultConfigurationTest1(Test& test)
 void CommandLineSpecificationTests::CreateDefaultConfigurationTest2(Test& test)
 {
     CommandLineSpecification spec;
+    spec.addNamedOption("option1", { CommandLineSpecification::OptionType::singleValue });
+
+    Configuration configuration = spec.createDefaultConfiguration();
+
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 0);
+    ISHIKO_TEST_PASS();
+}
+
+void CommandLineSpecificationTests::CreateDefaultConfigurationTest3(Test& test)
+{
+    CommandLineSpecification spec;
     spec.addNamedOption("option1", { CommandLineSpecification::OptionType::singleValue, "default" });
 
     Configuration configuration = spec.createDefaultConfiguration();
@@ -63,7 +90,7 @@ void CommandLineSpecificationTests::CreateDefaultConfigurationTest2(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void CommandLineSpecificationTests::CreateDefaultConfigurationTest3(Test& test)
+void CommandLineSpecificationTests::CreateDefaultConfigurationTest4(Test& test)
 {
     CommandLineSpecification spec;
     spec.addNamedOption("option1", { CommandLineSpecification::OptionType::singleValue, "default" });
