@@ -8,6 +8,7 @@
 #define _ISHIKO_CONFIGURATION_COMMANDLINESPECIFICATION_HPP_
 
 #include "Configuration.hpp"
+#include <boost/optional.hpp>
 #include <map>
 #include <string>
 
@@ -28,14 +29,15 @@ public:
     {
     public:
         OptionDetails();
+        OptionDetails(OptionType type);
         OptionDetails(OptionType type, std::string defaultValue);
 
-        OptionType type() const;
-        const std::string& defaultValue() const;
+        OptionType type() const noexcept;
+        const boost::optional<std::string>& defaultValue() const noexcept;
 
     private:
         OptionType m_type;
-        std::string m_defaultValue;
+        boost::optional<std::string> m_defaultValue;
     };
 
     Configuration createDefaultConfiguration() const;

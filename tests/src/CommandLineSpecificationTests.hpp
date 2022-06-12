@@ -17,9 +17,11 @@ public:
 private:
     static void ConstructorTest1(Ishiko::Test& test);
     static void AddNamedOptionTest1(Ishiko::Test& test);
+    static void AddNamedOptionTest2(Ishiko::Test& test);
     static void CreateDefaultConfigurationTest1(Ishiko::Test& test);
     static void CreateDefaultConfigurationTest2(Ishiko::Test& test);
     static void CreateDefaultConfigurationTest3(Ishiko::Test& test);
+    static void CreateDefaultConfigurationTest4(Ishiko::Test& test);
 };
 
 #endif
