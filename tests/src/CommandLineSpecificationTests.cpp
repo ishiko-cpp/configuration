@@ -36,7 +36,8 @@ void CommandLineSpecificationTests::AddNamedOptionTest1(Test& test)
     bool found = spec.find("option1", details);
 
     ISHIKO_TEST_FAIL_IF_NOT(found);
-    ISHIKO_TEST_FAIL_IF_NEQ(details.defaultValue(), "default");
+    ISHIKO_TEST_FAIL_IF_NOT(details.defaultValue().has_value());
+    ISHIKO_TEST_FAIL_IF_NEQ(*details.defaultValue(), "default");
     ISHIKO_TEST_PASS();
 }
 

@@ -18,12 +18,12 @@ CommandLineSpecification::OptionDetails::OptionDetails(OptionType type, std::str
 {
 }
 
-CommandLineSpecification::OptionType CommandLineSpecification::OptionDetails::type() const
+CommandLineSpecification::OptionType CommandLineSpecification::OptionDetails::type() const noexcept
 {
     return m_type;
 }
 
-const std::string& CommandLineSpecification::OptionDetails::defaultValue() const
+const boost::optional<std::string>& CommandLineSpecification::OptionDetails::defaultValue() const noexcept
 {
     return m_defaultValue;
 }
@@ -34,7 +34,11 @@ Configuration CommandLineSpecification::createDefaultConfiguration() const
 
     for (const std::pair<std::string, OptionDetails>& option : m_options)
     {
-        result.set(option.first, option.second.defaultValue());
+        boost::optional<std::string> defaultValue = option.second.defaultValue();
+        if (defaultValue.has_value())
+        {
+            result.set(option.first, *defaultValue);
+        }
     }
 
     return result;
