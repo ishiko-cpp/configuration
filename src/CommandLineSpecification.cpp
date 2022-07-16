@@ -33,6 +33,23 @@ const boost::optional<std::string>& CommandLineSpecification::OptionDetails::def
     return m_defaultValue;
 }
 
+void CommandLineSpecification::OptionDetails::setDefaultValue(const boost::optional<std::string>& value)
+{
+    m_defaultValue = value;
+}
+
+void CommandLineSpecification::OptionDetails::setDefaultValue(const char* value)
+{
+    if (value)
+    {
+        m_defaultValue = value;
+    }
+    else
+    {
+        m_defaultValue = boost::optional<std::string>();
+    }
+}
+
 Configuration CommandLineSpecification::createDefaultConfiguration() const
 {
     Configuration result;
@@ -65,5 +82,25 @@ bool CommandLineSpecification::find(const std::string& name, OptionDetails& deta
     else
     {
         return false;
+    }
+}
+
+void CommandLineSpecification::setDefaultValue(const std::string& name, const boost::optional<std::string>& value)
+{
+    // TODO: what if the option doesn't exist
+    std::map<std::string, OptionDetails>::iterator it = m_options.find(name);
+    if (it != m_options.end())
+    {
+        it->second.setDefaultValue(value);
+    }
+}
+
+void CommandLineSpecification::setDefaultValue(const std::string& name, const char* value)
+{
+    // TODO: what if the option doesn't exist
+    std::map<std::string, OptionDetails>::iterator it = m_options.find(name);
+    if (it != m_options.end())
+    {
+        it->second.setDefaultValue(value);
     }
 }
