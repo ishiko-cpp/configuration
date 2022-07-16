@@ -15,6 +15,7 @@ CommandLineSpecificationTests::CommandLineSpecificationTests(const TestNumber& n
     append<HeapAllocationErrorsTest>("Constructor test 1", ConstructorTest1);
     append<HeapAllocationErrorsTest>("addNamedOption test 1", AddNamedOptionTest1);
     append<HeapAllocationErrorsTest>("addNamedOption test 2", AddNamedOptionTest2);
+    append<HeapAllocationErrorsTest>("setDefaultValue test 1", SetDefaultValueTest1);
     append<HeapAllocationErrorsTest>("createDefaultConfiguration test 1", CreateDefaultConfigurationTest1);
     append<HeapAllocationErrorsTest>("createDefaultConfiguration test 2", CreateDefaultConfigurationTest2);
     append<HeapAllocationErrorsTest>("createDefaultConfiguration test 3", CreateDefaultConfigurationTest3);
@@ -54,6 +55,22 @@ void CommandLineSpecificationTests::AddNamedOptionTest2(Test& test)
     ISHIKO_TEST_FAIL_IF_NOT(found);
     ISHIKO_TEST_FAIL_IF_NOT(details.defaultValue().has_value());
     ISHIKO_TEST_FAIL_IF_NEQ(*details.defaultValue(), "default");
+    ISHIKO_TEST_PASS();
+}
+
+void CommandLineSpecificationTests::SetDefaultValueTest1(Test& test)
+{
+    CommandLineSpecification spec;
+    spec.addNamedOption("option1", { CommandLineSpecification::OptionType::singleValue, "default" });
+    
+    spec.setDefaultValue("option1", "updatedDefault");
+
+    CommandLineSpecification::OptionDetails details;
+    bool found = spec.find("option1", details);
+
+    ISHIKO_TEST_FAIL_IF_NOT(found);
+    ISHIKO_TEST_FAIL_IF_NOT(details.defaultValue().has_value());
+    ISHIKO_TEST_FAIL_IF_NEQ(*details.defaultValue(), "updatedDefault");
     ISHIKO_TEST_PASS();
 }
 
