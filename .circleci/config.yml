@@ -23,7 +23,7 @@ jobs:
           path: /workspace/projects/ishiko/cpp/configuration
       - run:
           name: Build
-          command: cd /workspace/projects/ishiko/cpp/configuration/build/gnumake && make
+          command: cd /workspace/projects/ishiko/cpp/configuration/build-files/gnumake && make
       - run:
           name: "Install test dependency: Ishiko/C++ Types"
           command: cd /workspace/projects/ishiko/cpp && git clone https://github.com/ishiko-cpp/types.git && cd types/build-files/gnumake && make
@@ -53,10 +53,10 @@ jobs:
           command: cd /workspace/projects/ishiko/cpp && git clone https://github.com/ishiko-cpp/test-framework.git && cd test-framework/core/build/gnumake && make
       - run:
           name: Test build
-          command: cd /workspace/projects/ishiko/cpp/configuration/tests/build/gnumake && make
+          command: cd /workspace/projects/ishiko/cpp/configuration/tests/build-files/gnumake && make
       - run:
           name: Run the tests
-          command: cd /workspace/projects/ishiko/cpp/configuration/tests/build/gnumake && ./IshikoConfigurationTests
+          command: cd /workspace/projects/ishiko/cpp/configuration/tests/build-files/gnumake && ./IshikoConfigurationTests
 workflows:
   version: 2
   continuous_build:
