@@ -50,7 +50,7 @@ public:
 
     void addNamedOption(const std::string& name, const OptionDetails& details);
 
-    bool findPositionalOption(size_t position, OptionDetails& details) const;
+    bool findPositionalOption(size_t position, std::string& name, OptionDetails& details) const;
 
     bool findNamedOption(const std::string& name, OptionDetails& details) const;
 

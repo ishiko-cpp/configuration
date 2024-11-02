@@ -33,10 +33,12 @@ void CommandLineSpecificationTests::AddPositionalOptionTest1(Test& test)
 
     spec.addPositionalOption(1, "option1", {CommandLineSpecification::OptionType::single_value});
 
+    std::string name;
     CommandLineSpecification::OptionDetails details;
-    bool found = spec.findPositionalOption(1, details);
+    bool found = spec.findPositionalOption(1, name, details);
 
     ISHIKO_TEST_FAIL_IF_NOT(found);
+    ISHIKO_TEST_FAIL_IF_NEQ(name, "option1");
     ISHIKO_TEST_FAIL_IF(details.defaultValue().has_value());
     ISHIKO_TEST_PASS();
 }
