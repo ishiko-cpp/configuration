@@ -19,8 +19,7 @@ public:
     {
         uninitialized,
         single_value,
-        toggle,
-        enumeration
+        toggle
     };
 
     class OptionDetails
@@ -42,16 +41,19 @@ public:
 
     Configuration createDefaultConfiguration() const;
 
-    void addPositionalOption(size_t position);
+    void addPositionalOption(size_t position, const OptionDetails& details);
 
     void addNamedOption(const std::string& name, const OptionDetails& details);
 
-    bool find(const std::string& name, OptionDetails& details) const;
+    bool findPositionalOption(size_t position, OptionDetails& details) const;
+
+    bool findNamedOption(const std::string& name, OptionDetails& details) const;
 
     void setDefaultValue(const std::string& name, const boost::optional<std::string>& value);
     void setDefaultValue(const std::string& name, const char* value);
 
 private:
+    std::map<size_t, OptionDetails> m_positional_options;
     std::map<std::string, OptionDetails> m_named_options;
 };
 

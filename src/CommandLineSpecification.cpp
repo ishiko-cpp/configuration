@@ -1,8 +1,5 @@
-/*
-    Copyright (c) 2021-2022 Xavier Leclercq
-    Released under the MIT License
-    See https://github.com/ishiko-cpp/configuration/blob/main/LICENSE.txt
-*/
+// SPDX-FileCopyrightText: 2000-2024 Xavier Leclercq
+// SPDX-License-Identifier: BSL-1.0
 
 #include "CommandLineSpecification.hpp"
 
@@ -66,9 +63,9 @@ Configuration CommandLineSpecification::createDefaultConfiguration() const
     return result;
 }
 
-void CommandLineSpecification::addPositionalOption(size_t position)
+void CommandLineSpecification::addPositionalOption(size_t position, const OptionDetails& details)
 {
-
+    m_positional_options.emplace(position, details);
 }
 
 void CommandLineSpecification::addNamedOption(const std::string& name, const OptionDetails& details)
@@ -76,7 +73,21 @@ void CommandLineSpecification::addNamedOption(const std::string& name, const Opt
     m_named_options.emplace(name, details);
 }
 
-bool CommandLineSpecification::find(const std::string& name, OptionDetails& details) const
+bool CommandLineSpecification::findPositionalOption(size_t position, OptionDetails& details) const
+{
+    std::map<size_t, OptionDetails>::const_iterator it = m_positional_options.find(position);
+    if (it != m_positional_options.end())
+    {
+        details = it->second;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool CommandLineSpecification::findNamedOption(const std::string& name, OptionDetails& details) const
 {
     std::map<std::string, OptionDetails>::const_iterator it = m_named_options.find(name);
     if (it != m_named_options.end())
