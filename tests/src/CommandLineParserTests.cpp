@@ -1,8 +1,5 @@
-/*
-    Copyright (c) 2021-2022 Xavier Leclercq
-    Released under the MIT License
-    See https://github.com/ishiko-cpp/configuration/blob/main/LICENSE.txt
-*/
+// SPDX-FileCopyrightText: 2000-2024 Xavier Leclercq
+// SPDX-License-Identifier: BSL-1.0
 
 #include "CommandLineParserTests.hpp"
 #include "Ishiko/Configuration/CommandLineParser.hpp"
@@ -16,6 +13,7 @@ CommandLineParserTests::CommandLineParserTests(const TestNumber& number, const T
     append<HeapAllocationErrorsTest>("parse test 1", ParseTest1);
     append<HeapAllocationErrorsTest>("parse test 2", ParseTest2);
     append<HeapAllocationErrorsTest>("parse test 3", ParseTest3);
+    append<HeapAllocationErrorsTest>("parse test 4", ParseTest4);
 }
 
 void CommandLineParserTests::ConstructorTest1(Test& test)
@@ -28,11 +26,11 @@ void CommandLineParserTests::ConstructorTest1(Test& test)
 void CommandLineParserTests::ParseTest1(Test& test)
 {
     CommandLineSpecification spec;
-    spec.addNamedOption("option1", { CommandLineSpecification::OptionType::singleValue, "default" });
+    spec.addPositionalOption(1, "option1", {CommandLineSpecification::OptionType::single_value});
 
     CommandLineParser parser;
     int argc = 2;
-    const char* argv[] = { "dummy", "--option1=value1" };
+    const char* argv[] = {"dummy", "value1"};
     Configuration configuration;
     parser.parse(spec, argc, argv, configuration);
 
@@ -43,11 +41,26 @@ void CommandLineParserTests::ParseTest1(Test& test)
 void CommandLineParserTests::ParseTest2(Test& test)
 {
     CommandLineSpecification spec;
-    spec.addNamedOption("option1", { CommandLineSpecification::OptionType::singleValue, "default" });
+    spec.addNamedOption("option1", {CommandLineSpecification::OptionType::single_value, "default"});
+
+    CommandLineParser parser;
+    int argc = 2;
+    const char* argv[] = {"dummy", "--option1=value1"};
+    Configuration configuration;
+    parser.parse(spec, argc, argv, configuration);
+
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1").asString(), "value1");
+    ISHIKO_TEST_PASS();
+}
+
+void CommandLineParserTests::ParseTest3(Test& test)
+{
+    CommandLineSpecification spec;
+    spec.addNamedOption("option1", {CommandLineSpecification::OptionType::single_value, "default"});
 
     CommandLineParser parser;
     int argc = 3;
-    const char* argv[] = { "dummy", "--option1=value1", "--option2=value2" };
+    const char* argv[] = {"dummy", "--option1=value1", "--option2=value2"};
     Configuration configuration;
     parser.parse(spec, argc, argv, configuration);
 
@@ -56,13 +69,13 @@ void CommandLineParserTests::ParseTest2(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void CommandLineParserTests::ParseTest3(Test& test)
+void CommandLineParserTests::ParseTest4(Test& test)
 {
     CommandLineSpecification spec;
 
     CommandLineParser parser;
     int argc = 2;
-    const char* argv[] = { "dummy", "--option1" };
+    const char* argv[] = {"dummy", "--option1"};
     Configuration configuration;
     parser.parse(spec, argc, argv, configuration);
 

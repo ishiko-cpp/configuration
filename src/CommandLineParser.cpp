@@ -13,6 +13,7 @@ void CommandLineParser::parse(const CommandLineSpecification& specification, int
     Configuration& configuration)
 {
     // The first argument is the executable so we ignore it
+    size_t positional_option = 0;
     for (int i = 1; i < argc; ++i)
     {
         const char* arg = argv[i];
@@ -32,6 +33,28 @@ void CommandLineParser::parse(const CommandLineSpecification& specification, int
             {
                 // TODO: use spec to find value to assign
                 configuration.set(CString::Substring(arg, 2), "");
+            }
+        }
+        else
+        {
+            ++positional_option;
+            
+            std::string name;
+            CommandLineSpecification::OptionDetails details;
+            if (specification.findPositionalOption(positional_option, name, details))
+            {
+                if (details.isValueAllowed(arg))
+                {
+                    configuration.set(name, arg);
+                }
+                else
+                {
+                    // TODO: error
+                }
+            }
+            else
+            {
+                // TODO
             }
         }
     }
