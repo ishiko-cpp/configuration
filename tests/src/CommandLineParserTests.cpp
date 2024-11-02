@@ -28,7 +28,7 @@ void CommandLineParserTests::ConstructorTest1(Test& test)
 void CommandLineParserTests::ParseTest1(Test& test)
 {
     CommandLineSpecification spec;
-    spec.addNamedOption("option1", { CommandLineSpecification::OptionType::singleValue, "default" });
+    spec.addNamedOption("option1", {CommandLineSpecification::OptionType::single_value, "default"});
 
     CommandLineParser parser;
     int argc = 2;
@@ -43,7 +43,7 @@ void CommandLineParserTests::ParseTest1(Test& test)
 void CommandLineParserTests::ParseTest2(Test& test)
 {
     CommandLineSpecification spec;
-    spec.addNamedOption("option1", { CommandLineSpecification::OptionType::singleValue, "default" });
+    spec.addNamedOption("option1", {CommandLineSpecification::OptionType::single_value, "default"});
 
     CommandLineParser parser;
     int argc = 3;

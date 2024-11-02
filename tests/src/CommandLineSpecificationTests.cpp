@@ -1,8 +1,5 @@
-/*
-    Copyright (c) 2021-2022 Xavier Leclercq
-    Released under the MIT License
-    See https://github.com/ishiko-cpp/configuration/blob/main/LICENSE.txt
-*/
+// SPDX-FileCopyrightText: 2000-2024 Xavier Leclercq
+// SPDX-License-Identifier: BSL-1.0
 
 #include "CommandLineSpecificationTests.hpp"
 #include "Ishiko/Configuration/CommandLineSpecification.hpp"
@@ -33,7 +30,7 @@ void CommandLineSpecificationTests::AddNamedOptionTest1(Test& test)
 {
     CommandLineSpecification spec;
 
-    spec.addNamedOption("option1", { CommandLineSpecification::OptionType::singleValue });
+    spec.addNamedOption("option1", {CommandLineSpecification::OptionType::single_value});
 
     CommandLineSpecification::OptionDetails details;
     bool found = spec.find("option1", details);
@@ -47,7 +44,7 @@ void CommandLineSpecificationTests::AddNamedOptionTest2(Test& test)
 {
     CommandLineSpecification spec;
 
-    spec.addNamedOption("option1", { CommandLineSpecification::OptionType::singleValue, "default" });
+    spec.addNamedOption("option1", {CommandLineSpecification::OptionType::single_value, "default"});
 
     CommandLineSpecification::OptionDetails details;
     bool found = spec.find("option1", details);
@@ -61,7 +58,7 @@ void CommandLineSpecificationTests::AddNamedOptionTest2(Test& test)
 void CommandLineSpecificationTests::SetDefaultValueTest1(Test& test)
 {
     CommandLineSpecification spec;
-    spec.addNamedOption("option1", { CommandLineSpecification::OptionType::singleValue, "default" });
+    spec.addNamedOption("option1", {CommandLineSpecification::OptionType::single_value, "default"});
     
     spec.setDefaultValue("option1", "updatedDefault");
 
@@ -87,7 +84,7 @@ void CommandLineSpecificationTests::CreateDefaultConfigurationTest1(Test& test)
 void CommandLineSpecificationTests::CreateDefaultConfigurationTest2(Test& test)
 {
     CommandLineSpecification spec;
-    spec.addNamedOption("option1", { CommandLineSpecification::OptionType::singleValue });
+    spec.addNamedOption("option1", {CommandLineSpecification::OptionType::single_value});
 
     Configuration configuration = spec.createDefaultConfiguration();
 
@@ -98,7 +95,7 @@ void CommandLineSpecificationTests::CreateDefaultConfigurationTest2(Test& test)
 void CommandLineSpecificationTests::CreateDefaultConfigurationTest3(Test& test)
 {
     CommandLineSpecification spec;
-    spec.addNamedOption("option1", { CommandLineSpecification::OptionType::singleValue, "default" });
+    spec.addNamedOption("option1", {CommandLineSpecification::OptionType::single_value, "default"});
 
     Configuration configuration = spec.createDefaultConfiguration();
 
@@ -110,8 +107,8 @@ void CommandLineSpecificationTests::CreateDefaultConfigurationTest3(Test& test)
 void CommandLineSpecificationTests::CreateDefaultConfigurationTest4(Test& test)
 {
     CommandLineSpecification spec;
-    spec.addNamedOption("option1", { CommandLineSpecification::OptionType::singleValue, "default" });
-    spec.addNamedOption("option2", { CommandLineSpecification::OptionType::toggle, "true" });
+    spec.addNamedOption("option1", {CommandLineSpecification::OptionType::single_value, "default"});
+    spec.addNamedOption("option2", {CommandLineSpecification::OptionType::toggle, "true"});
 
     Configuration configuration = spec.createDefaultConfiguration();
 

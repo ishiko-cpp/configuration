@@ -1,11 +1,8 @@
-/*
-    Copyright (c) 2021-2022 Xavier Leclercq
-    Released under the MIT License
-    See https://github.com/ishiko-cpp/configuration/blob/main/LICENSE.txt
-*/
+// SPDX-FileCopyrightText: 2000-2024 Xavier Leclercq
+// SPDX-License-Identifier: BSL-1.0
 
-#ifndef _ISHIKO_CONFIGURATION_COMMANDLINESPECIFICATION_HPP_
-#define _ISHIKO_CONFIGURATION_COMMANDLINESPECIFICATION_HPP_
+#ifndef GUARD_ISHIKO_CPP_CONFIGURATION_COMMANDLINESPECIFICATION_HPP
+#define GUARD_ISHIKO_CPP_CONFIGURATION_COMMANDLINESPECIFICATION_HPP
 
 #include "Configuration.hpp"
 #include <boost/optional.hpp>
@@ -21,8 +18,9 @@ public:
     enum class OptionType
     {
         uninitialized,
-        singleValue,
-        toggle
+        single_value,
+        toggle,
+        enumeration
     };
 
     class OptionDetails
@@ -44,6 +42,8 @@ public:
 
     Configuration createDefaultConfiguration() const;
 
+    void addPositionalOption(size_t position);
+
     void addNamedOption(const std::string& name, const OptionDetails& details);
 
     bool find(const std::string& name, OptionDetails& details) const;
@@ -52,7 +52,7 @@ public:
     void setDefaultValue(const std::string& name, const char* value);
 
 private:
-    std::map<std::string, OptionDetails> m_options;
+    std::map<std::string, OptionDetails> m_named_options;
 };
 
 }

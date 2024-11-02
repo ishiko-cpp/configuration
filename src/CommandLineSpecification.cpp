@@ -54,7 +54,7 @@ Configuration CommandLineSpecification::createDefaultConfiguration() const
 {
     Configuration result;
 
-    for (const std::pair<std::string, OptionDetails>& option : m_options)
+    for (const std::pair<std::string, OptionDetails>& option : m_named_options)
     {
         boost::optional<std::string> defaultValue = option.second.defaultValue();
         if (defaultValue.has_value())
@@ -66,15 +66,20 @@ Configuration CommandLineSpecification::createDefaultConfiguration() const
     return result;
 }
 
+void CommandLineSpecification::addPositionalOption(size_t position)
+{
+
+}
+
 void CommandLineSpecification::addNamedOption(const std::string& name, const OptionDetails& details)
 {
-    m_options.emplace(name, details);
+    m_named_options.emplace(name, details);
 }
 
 bool CommandLineSpecification::find(const std::string& name, OptionDetails& details) const
 {
-    std::map<std::string, OptionDetails>::const_iterator it = m_options.find(name);
-    if (it != m_options.end())
+    std::map<std::string, OptionDetails>::const_iterator it = m_named_options.find(name);
+    if (it != m_named_options.end())
     {
         details = it->second;
         return true;
@@ -88,8 +93,8 @@ bool CommandLineSpecification::find(const std::string& name, OptionDetails& deta
 void CommandLineSpecification::setDefaultValue(const std::string& name, const boost::optional<std::string>& value)
 {
     // TODO: what if the option doesn't exist
-    std::map<std::string, OptionDetails>::iterator it = m_options.find(name);
-    if (it != m_options.end())
+    std::map<std::string, OptionDetails>::iterator it = m_named_options.find(name);
+    if (it != m_named_options.end())
     {
         it->second.setDefaultValue(value);
     }
@@ -98,8 +103,8 @@ void CommandLineSpecification::setDefaultValue(const std::string& name, const bo
 void CommandLineSpecification::setDefaultValue(const std::string& name, const char* value)
 {
     // TODO: what if the option doesn't exist
-    std::map<std::string, OptionDetails>::iterator it = m_options.find(name);
-    if (it != m_options.end())
+    std::map<std::string, OptionDetails>::iterator it = m_named_options.find(name);
+    if (it != m_named_options.end())
     {
         it->second.setDefaultValue(value);
     }
