@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: BSL-1.0
 
 #include "CommandLineSpecification.hpp"
+#include <algorithm>
 
 using namespace Ishiko;
 
@@ -15,8 +16,8 @@ CommandLineSpecification::OptionDetails::OptionDetails(OptionType type)
 {
 }
 
-CommandLineSpecification::OptionDetails::OptionDetails(OptionType type, std::string defaultValue)
-    : m_type(type), m_defaultValue(std::move(defaultValue))
+CommandLineSpecification::OptionDetails::OptionDetails(OptionType type, std::string default_value)
+    : m_type(type), m_default_value(std::move(default_value))
 {
 }
 
@@ -27,24 +28,41 @@ CommandLineSpecification::OptionType CommandLineSpecification::OptionDetails::ty
 
 const boost::optional<std::string>& CommandLineSpecification::OptionDetails::defaultValue() const noexcept
 {
-    return m_defaultValue;
+    return m_default_value;
+}
+
+bool CommandLineSpecification::OptionDetails::isValueAllowed(const std::string& value) const noexcept
+{
+    if (m_allowed_values.empty())
+    {
+        return true;
+    }
+    else
+    {
+        return (std::find(m_allowed_values.begin(), m_allowed_values.end(), value) != m_allowed_values.end());
+    }
 }
 
 void CommandLineSpecification::OptionDetails::setDefaultValue(const boost::optional<std::string>& value)
 {
-    m_defaultValue = value;
+    m_default_value = value;
 }
 
 void CommandLineSpecification::OptionDetails::setDefaultValue(const char* value)
 {
     if (value)
     {
-        m_defaultValue = value;
+        m_default_value = value;
     }
     else
     {
-        m_defaultValue = boost::optional<std::string>();
+        m_default_value = boost::optional<std::string>();
     }
+}
+
+void CommandLineSpecification::OptionDetails::setAllowedValues(const std::vector<std::string>& values)
+{
+    m_allowed_values = values;
 }
 
 Configuration CommandLineSpecification::createDefaultConfiguration() const
@@ -63,9 +81,10 @@ Configuration CommandLineSpecification::createDefaultConfiguration() const
     return result;
 }
 
-void CommandLineSpecification::addPositionalOption(size_t position, const OptionDetails& details)
+void CommandLineSpecification::addPositionalOption(size_t position, const std::string& name,
+    const OptionDetails& details)
 {
-    m_positional_options.emplace(position, details);
+    m_positional_options.emplace(position, std::pair<std::string, OptionDetails>(name, details));
 }
 
 void CommandLineSpecification::addNamedOption(const std::string& name, const OptionDetails& details)
@@ -75,10 +94,10 @@ void CommandLineSpecification::addNamedOption(const std::string& name, const Opt
 
 bool CommandLineSpecification::findPositionalOption(size_t position, OptionDetails& details) const
 {
-    std::map<size_t, OptionDetails>::const_iterator it = m_positional_options.find(position);
+    std::map<size_t, std::pair<std::string, OptionDetails>>::const_iterator it = m_positional_options.find(position);
     if (it != m_positional_options.end())
     {
-        details = it->second;
+        details = it->second.second;
         return true;
     }
     else

@@ -31,7 +31,7 @@ void CommandLineSpecificationTests::AddPositionalOptionTest1(Test& test)
 {
     CommandLineSpecification spec;
 
-    spec.addPositionalOption(1, {CommandLineSpecification::OptionType::single_value});
+    spec.addPositionalOption(1, "option1", {CommandLineSpecification::OptionType::single_value});
 
     CommandLineSpecification::OptionDetails details;
     bool found = spec.findPositionalOption(1, details);
