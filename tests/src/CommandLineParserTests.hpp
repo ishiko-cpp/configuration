@@ -1,11 +1,8 @@
-/*
-    Copyright (c) 2021-2022 Xavier Leclercq
-    Released under the MIT License
-    See https://github.com/ishiko-cpp/configuration/blob/main/LICENSE.txt
-*/
+// SPDX-FileCopyrightText: 2000-2024 Xavier Leclercq
+// SPDX-License-Identifier: BSL-1.0
 
-#ifndef _ISHIKO_CPP_CONFIGURATION_TESTS_COMMANDLINEPARSERTESTS_HPP_
-#define _ISHIKO_CPP_CONFIGURATION_TESTS_COMMANDLINEPARSERTESTS_HPP_
+#ifndef GUARD_ISHIKO_CPP_CONFIGURATION_TESTS_COMMANDLINEPARSERTESTS_HPP
+#define GUARD_ISHIKO_CPP_CONFIGURATION_TESTS_COMMANDLINEPARSERTESTS_HPP
 
 #include <Ishiko/TestFramework/Core.hpp>
 
@@ -19,6 +16,7 @@ private:
     static void ParseTest1(Ishiko::Test& test);
     static void ParseTest2(Ishiko::Test& test);
     static void ParseTest3(Ishiko::Test& test);
+    static void ParseTest4(Ishiko::Test& test);
 };
 
 #endif
