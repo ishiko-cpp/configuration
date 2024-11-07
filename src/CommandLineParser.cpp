@@ -32,6 +32,34 @@ void CommandLineParser::parse(const CommandLineSpecification& specification, int
                 configuration.set(CString::Substring(arg, 2), "");
             }
         }
+        else if (CString::StartsWith(arg, "-"))
+        {
+            size_t pos = CString::Find(arg, "=");
+            if (pos != std::string::npos)
+            {
+                if (pos == 1)
+                {
+                    // TODO: error
+                }
+                std::string name;
+                CommandLineSpecification::OptionDetails details;
+                if (specification.findShortNamedOption(CString::Substring(arg, 1, pos), name, details))
+                {
+                    // TODO: what if value is empty, maybe that is valid?
+                    configuration.set(name, CString::Substring(arg, pos + 1));
+                }
+            }
+            else
+            {
+                std::string name;
+                CommandLineSpecification::OptionDetails details;
+                if (specification.findShortNamedOption(CString::Substring(arg, 1), name, details))
+                {
+                    // TODO: use spec to find value to assig)n
+                    configuration.set(name, "");
+                }
+            }
+        }
         else
         {
             ++positional_option;

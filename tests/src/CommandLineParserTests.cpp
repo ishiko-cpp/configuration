@@ -14,6 +14,7 @@ CommandLineParserTests::CommandLineParserTests(const TestNumber& number, const T
     append<HeapAllocationErrorsTest>("parse test 2", ParseTest2);
     append<HeapAllocationErrorsTest>("parse test 3", ParseTest3);
     append<HeapAllocationErrorsTest>("parse test 4", ParseTest4);
+    append<HeapAllocationErrorsTest>("parse test 5", ParseTest5);
 }
 
 void CommandLineParserTests::ConstructorTest1(Test& test)
@@ -80,5 +81,20 @@ void CommandLineParserTests::ParseTest4(Test& test)
     parser.parse(spec, argc, argv, configuration);
 
     ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1").asString(), "");
+    ISHIKO_TEST_PASS();
+}
+
+void CommandLineParserTests::ParseTest5(Test& test)
+{
+    CommandLineSpecification spec;
+    spec.addNamedOption("option1", "o", {CommandLineSpecification::OptionType::single_value, "default"});
+
+    CommandLineParser parser;
+    int argc = 2;
+    const char* argv[] = {"dummy", "-o=value1"};
+    Configuration configuration;
+    parser.parse(spec, argc, argv, configuration);
+
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1").asString(), "value1");
     ISHIKO_TEST_PASS();
 }

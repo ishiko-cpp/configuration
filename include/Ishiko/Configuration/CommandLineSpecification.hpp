@@ -53,6 +53,7 @@ namespace Ishiko
         bool findPositionalOption(size_t position, std::string& name, OptionDetails& details) const;
 
         bool findNamedOption(const std::string& name, OptionDetails& details) const;
+        bool findShortNamedOption(const std::string& short_name, std::string& name, OptionDetails& details) const;
 
         void setDefaultValue(const std::string& name, const boost::optional<std::string>& value);
         void setDefaultValue(const std::string& name, const char* value);
@@ -60,7 +61,7 @@ namespace Ishiko
     private:
         std::map<size_t, std::pair<std::string, OptionDetails>> m_positional_options;
         std::map<std::string, OptionDetails> m_named_options;
-        std::map<std::string, OptionDetails> m_short_named_options;
+        std::map<std::string, std::string> m_short_named_options;
     };
 }
 
