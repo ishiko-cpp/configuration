@@ -92,6 +92,13 @@ void CommandLineSpecification::addNamedOption(const std::string& name, const Opt
     m_named_options.emplace(name, details);
 }
 
+void CommandLineSpecification::addNamedOption(const std::string& name, const std::string& short_name,
+    const OptionDetails& details)
+{
+    m_named_options.emplace(name, details);
+    m_short_named_options.emplace(short_name, details);
+}
+
 bool CommandLineSpecification::findPositionalOption(size_t position, std::string& name, OptionDetails& details) const
 {
     std::map<size_t, std::pair<std::string, OptionDetails>>::const_iterator it = m_positional_options.find(position);

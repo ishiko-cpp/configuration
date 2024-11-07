@@ -21,7 +21,7 @@ namespace Ishiko
             enum class Type
             {
                 string = 0,
-                stringArray = 1,
+                string_array = 1,
                 configuration = 2,
             };
 
