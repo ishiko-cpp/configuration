@@ -1,8 +1,5 @@
-/*
-    Copyright (c) 2021-2022 Xavier Leclercq
-    Released under the MIT License
-    See https://github.com/ishiko-cpp/configuration/blob/main/LICENSE.txt
-*/
+// SPDX-FileCopyrightText: 2000-2024 Xavier Leclercq
+// SPDX-License-Identifier: BSL-1.0
 
 #include "CommandLineParser.hpp"
 #include <Ishiko/Text.hpp>
@@ -33,6 +30,32 @@ void CommandLineParser::parse(const CommandLineSpecification& specification, int
             {
                 // TODO: use spec to find value to assign
                 configuration.set(CString::Substring(arg, 2), "");
+            }
+        }
+        else if (CString::StartsWith(arg, "-"))
+        {
+            std::string short_name;
+            std::string value;
+            size_t pos = CString::Find(arg, "=");
+            if (pos != std::string::npos)
+            {
+                if (pos == 1)
+                {
+                    // TODO: error
+                }
+                short_name = CString::Substring(arg, 1, pos);
+                value = CString::Substring(arg, pos + 1);
+            }
+            else
+            {
+                short_name = CString::Substring(arg, 1);
+            }
+            std::string name;
+            CommandLineSpecification::OptionDetails details;
+            if (specification.findShortNamedOption(short_name, name, details))
+            {
+                // TODO: what if value is empty, maybe that is valid?
+                configuration.set(name, value);
             }
         }
         else

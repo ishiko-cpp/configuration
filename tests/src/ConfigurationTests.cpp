@@ -1,8 +1,5 @@
-/*
-    Copyright (c) 2022 Xavier Leclercq
-    Released under the MIT License
-    See https://github.com/ishiko-cpp/configuration/blob/main/LICENSE.txt
-*/
+// SPDX-FileCopyrightText: 2000-2024 Xavier Leclercq
+// SPDX-License-Identifier: BSL-1.0
 
 #include "ConfigurationTests.hpp"
 #include "Ishiko/Configuration/Configuration.hpp"
@@ -59,10 +56,10 @@ void ConfigurationTests::ValueConstructorTest3(Test& test)
 
 void ConfigurationTests::ValueConstructorTest4(Test& test)
 {
-    Configuration::Value value(std::vector<std::string>({ "item1", "item2" }));
+    Configuration::Value value(std::vector<std::string>({"item1", "item2"}));
 
-    ISHIKO_TEST_FAIL_IF_NEQ(value.type(), Configuration::Value::Type::stringArray);
-    ISHIKO_TEST_FAIL_IF_NEQ(value.asStringArray(), std::vector<std::string>({ "item1", "item2" }));
+    ISHIKO_TEST_FAIL_IF_NEQ(value.type(), Configuration::Value::Type::string_array);
+    ISHIKO_TEST_FAIL_IF_NEQ(value.asStringArray(), std::vector<std::string>({"item1", "item2"}));
     ISHIKO_TEST_PASS();
 }
 
@@ -90,12 +87,12 @@ void ConfigurationTests::SetTest2(Test& test)
 {
     Configuration configuration;
 
-    configuration.set("option1", std::vector<std::string>({ "value1", "value2" }));
+    configuration.set("option1", std::vector<std::string>({"value1", "value2"}));
 
     ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 1);
-    ISHIKO_TEST_ABORT_IF_NEQ(configuration.value("option1").type(), Configuration::Value::Type::stringArray);
+    ISHIKO_TEST_ABORT_IF_NEQ(configuration.value("option1").type(), Configuration::Value::Type::string_array);
     ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("option1").asStringArray(),
-        std::vector<std::string>({ "value1", "value2" }));
+        std::vector<std::string>({"value1", "value2"}));
     ISHIKO_TEST_PASS();
 }
 

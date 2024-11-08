@@ -17,6 +17,7 @@ private:
     static void ParseTest2(Ishiko::Test& test);
     static void ParseTest3(Ishiko::Test& test);
     static void ParseTest4(Ishiko::Test& test);
+    static void ParseTest5(Ishiko::Test& test);
 };
 
 #endif
