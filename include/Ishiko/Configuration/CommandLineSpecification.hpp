@@ -16,6 +16,10 @@ namespace Ishiko
     class CommandLineSpecification
     {
     public:
+        class CommandDetails
+        {
+        };
+
         enum class OptionType
         {
             uninitialized,
@@ -45,6 +49,8 @@ namespace Ishiko
 
         Configuration createDefaultConfiguration() const;
 
+        void addCommand(const std::string& option_name, const std::string& command_name);
+
         void addPositionalOption(size_t position, const std::string& name, const OptionDetails& details);
 
         void addNamedOption(const std::string& name, const OptionDetails& details);
@@ -62,6 +68,7 @@ namespace Ishiko
         std::map<size_t, std::pair<std::string, OptionDetails>> m_positional_options;
         std::map<std::string, OptionDetails> m_named_options;
         std::map<std::string, std::string> m_short_named_options;
+        std::map<std::string, std::map<std::string, CommandDetails>> m_commands;
     };
 }
 

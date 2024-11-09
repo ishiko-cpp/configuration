@@ -81,6 +81,11 @@ Configuration CommandLineSpecification::createDefaultConfiguration() const
     return result;
 }
 
+void CommandLineSpecification::addCommand(const std::string& option_name, const std::string& command_name)
+{
+    m_commands[option_name].emplace(command_name, CommandDetails());
+}
+
 void CommandLineSpecification::addPositionalOption(size_t position, const std::string& name,
     const OptionDetails& details)
 {
