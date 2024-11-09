@@ -96,12 +96,22 @@ void CommandLineParser::parse(const CommandLineSpecification& specification, int
             }
         }
 
-        if (specification.findCommand(option_name, option_value, command_details))
+        CommandLineSpecification::CommandDetails new_command_details;
+        if (command_details.findCommand(option_name, option_value, new_command_details))
         {
             Configuration command_configuration;
             command_configuration.set("name", option_value);
             current_configuration->set(option_name, command_configuration);
             current_configuration = &current_configuration->value(option_name).asConfiguration();
+            command_details = new_command_details;
+        }
+        else if (specification.findCommand(option_name, option_value, new_command_details))
+        {
+            Configuration command_configuration;
+            command_configuration.set("name", option_value);
+            current_configuration->set(option_name, command_configuration);
+            current_configuration = &current_configuration->value(option_name).asConfiguration();
+            command_details = new_command_details;
         }
         else
         {

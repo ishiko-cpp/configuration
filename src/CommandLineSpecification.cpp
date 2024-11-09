@@ -88,6 +88,29 @@ bool CommandLineSpecification::CommandDetails::findPositionalOption(size_t posit
     }
 }
 
+
+CommandLineSpecification::CommandDetails& CommandLineSpecification::CommandDetails::addCommand(
+    const std::string& option_name, const std::string& command_name)
+{
+    return m_commands[option_name].emplace(command_name, CommandDetails()).first->second;
+}
+
+bool CommandLineSpecification::CommandDetails::findCommand(const std::string& option_name,
+    const std::string& command_name, CommandDetails& details) const
+{
+    std::map<std::string, std::map<std::string, CommandDetails>>::const_iterator option_it = m_commands.find(option_name);
+    if (option_it != m_commands.end())
+    {
+        std::map<std::string, CommandDetails>::const_iterator command_it = option_it->second.find(command_name);
+        if (command_it != option_it->second.end())
+        {
+            details = command_it->second;
+            return true;
+        }
+    }
+    return false;
+}
+
 Configuration CommandLineSpecification::createDefaultConfiguration() const
 {
     Configuration result;
@@ -113,8 +136,10 @@ CommandLineSpecification::CommandDetails& CommandLineSpecification::addCommand(c
 CommandLineSpecification::CommandDetails& CommandLineSpecification::addCommand(const std::string& option_name,
     const std::string& command_name, const std::string& subcommand_name)
 {
-    // TODO: register subcommand
-    return m_commands[option_name].emplace(command_name, CommandDetails()).first->second;
+    CommandLineSpecification::CommandDetails& command_details = addCommand(option_name, command_name);
+    // TODO: should be position of option_name + 1 and not a hardcoded 2
+    command_details.addPositionalOption(2, "subcommand", {CommandLineSpecification::OptionType::single_value});
+    return command_details.addCommand("subcommand", subcommand_name);
 }
 
 void CommandLineSpecification::addPositionalOption(size_t position, const std::string& name,

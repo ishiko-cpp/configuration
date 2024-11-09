@@ -49,8 +49,13 @@ namespace Ishiko
             void addPositionalOption(size_t position, const std::string& name, const OptionDetails& details);
             bool findPositionalOption(size_t position, std::string& name, OptionDetails& details) const;
 
+            CommandDetails& addCommand(const std::string& option_name, const std::string& command_name);
+            bool findCommand(const std::string& option_name, const std::string& command_name,
+                CommandDetails& details) const;
+
         private:
             std::map<size_t, std::pair<std::string, OptionDetails>> m_positional_options;
+            std::map<std::string, std::map<std::string, CommandDetails>> m_commands;
         };
 
         Configuration createDefaultConfiguration() const;
