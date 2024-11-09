@@ -43,6 +43,7 @@ namespace Ishiko
 
         const Value& value(const std::string& name) const;
         Value& value(const std::string& name);
+        const char* valueOrDefault(const std::string& name, const char* default_value) const noexcept;
         const std::string& valueOrDefault(const std::string& name, const std::string& defaultValue) const noexcept;
         const std::vector<std::string>& valueOrDefault(const std::string& name,
             const std::vector<std::string>& defaultValue) const noexcept;

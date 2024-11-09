@@ -70,6 +70,20 @@ Configuration::Value& Configuration::value(const std::string& name)
     return m_options.at(name);
 }
 
+const char* Configuration::valueOrDefault(const std::string& name,
+    const char* default_value) const noexcept
+{
+    std::map<std::string, Value>::const_iterator it = m_options.find(name);
+    if (it != m_options.end())
+    {
+        return it->second.asString().c_str();
+    }
+    else
+    {
+        return default_value;
+    }
+}
+
 const std::string& Configuration::valueOrDefault(const std::string& name,
     const std::string& defaultValue) const noexcept
 {
