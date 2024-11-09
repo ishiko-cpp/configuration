@@ -10,7 +10,7 @@ void CommandLineParser::parse(const CommandLineSpecification& specification, int
     Configuration& configuration)
 {
     CommandLineSpecification::CommandDetails command_details;
-    Configuration* current_configuration = &configuration;
+    Configuration* current_command_configuration = &configuration;
 
     // The first argument is the executable so we ignore it
     size_t positional_option = 0;
@@ -19,6 +19,7 @@ void CommandLineParser::parse(const CommandLineSpecification& specification, int
         const char* arg = argv[i];
         std::string option_name;
         std::string option_value;
+        bool current_command_option = false;
         if (CString::StartsWith(arg, "--"))
         {
             size_t pos = CString::Find(arg, "=");
@@ -73,6 +74,7 @@ void CommandLineParser::parse(const CommandLineSpecification& specification, int
                 if (details.isValueAllowed(arg))
                 {
                     option_value = arg;
+                    current_command_option = true;
                 }
                 else
                 {
@@ -101,21 +103,28 @@ void CommandLineParser::parse(const CommandLineSpecification& specification, int
         {
             Configuration command_configuration;
             command_configuration.set("name", option_value);
-            current_configuration->set(option_name, command_configuration);
-            current_configuration = &current_configuration->value(option_name).asConfiguration();
+            current_command_configuration->set(option_name, command_configuration);
+            current_command_configuration = &current_command_configuration->value(option_name).asConfiguration();
             command_details = new_command_details;
         }
         else if (specification.findCommand(option_name, option_value, new_command_details))
         {
             Configuration command_configuration;
             command_configuration.set("name", option_value);
-            current_configuration->set(option_name, command_configuration);
-            current_configuration = &current_configuration->value(option_name).asConfiguration();
+            current_command_configuration->set(option_name, command_configuration);
+            current_command_configuration = &current_command_configuration->value(option_name).asConfiguration();
             command_details = new_command_details;
         }
         else
         {
-            current_configuration->set(option_name, option_value);
+            if (current_command_option)
+            {
+                current_command_configuration->set(option_name, option_value);
+            }
+            else
+            {
+                configuration.set(option_name, option_value);
+            }
         }
     }
 }
