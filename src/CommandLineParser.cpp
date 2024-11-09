@@ -14,6 +14,8 @@ void CommandLineParser::parse(const CommandLineSpecification& specification, int
     for (int i = 1; i < argc; ++i)
     {
         const char* arg = argv[i];
+        std::string option_name;
+        std::string option_value;
         if (CString::StartsWith(arg, "--"))
         {
             size_t pos = CString::Find(arg, "=");
@@ -23,19 +25,22 @@ void CommandLineParser::parse(const CommandLineSpecification& specification, int
                 {
                     // TODO: error
                 }
+                option_name = CString::Substring(arg, 2, pos);
                 // TODO: what if value is empty, maybe that is valid?
-                configuration.set(CString::Substring(arg, 2, pos), CString::Substring(arg, pos + 1));
+                option_value = CString::Substring(arg, pos + 1);
+                configuration.set(option_name, option_value);
             }
             else
             {
+                option_name = CString::Substring(arg, 2);
                 // TODO: use spec to find value to assign
-                configuration.set(CString::Substring(arg, 2), "");
+                option_value = "";
+                configuration.set(option_name, option_value);
             }
         }
         else if (CString::StartsWith(arg, "-"))
         {
             std::string short_name;
-            std::string value;
             size_t pos = CString::Find(arg, "=");
             if (pos != std::string::npos)
             {
@@ -44,31 +49,31 @@ void CommandLineParser::parse(const CommandLineSpecification& specification, int
                     // TODO: error
                 }
                 short_name = CString::Substring(arg, 1, pos);
-                value = CString::Substring(arg, pos + 1);
+                option_value = CString::Substring(arg, pos + 1);
             }
             else
             {
                 short_name = CString::Substring(arg, 1);
+                option_value = "";
             }
-            std::string name;
             CommandLineSpecification::OptionDetails details;
-            if (specification.findShortNamedOption(short_name, name, details))
+            if (specification.findShortNamedOption(short_name, option_name, details))
             {
                 // TODO: what if value is empty, maybe that is valid?
-                configuration.set(name, value);
+                configuration.set(option_name, option_value);
             }
         }
         else
         {
             ++positional_option;
             
-            std::string name;
             CommandLineSpecification::OptionDetails details;
-            if (specification.findPositionalOption(positional_option, name, details))
+            if (specification.findPositionalOption(positional_option, option_name, details))
             {
                 if (details.isValueAllowed(arg))
                 {
-                    configuration.set(name, arg);
+                    option_value = arg;
+                    configuration.set(option_name, arg);
                 }
                 else
                 {
@@ -79,6 +84,11 @@ void CommandLineParser::parse(const CommandLineSpecification& specification, int
             {
                 // TODO
             }
+        }
+        CommandLineSpecification::CommandDetails command_details;
+        if (specification.findCommand(option_name, option_value, command_details))
+        {
+            // TODO
         }
     }
 }

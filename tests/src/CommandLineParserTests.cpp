@@ -16,6 +16,7 @@ CommandLineParserTests::CommandLineParserTests(const TestNumber& number, const T
     append<HeapAllocationErrorsTest>("parse test 4", ParseTest4);
     append<HeapAllocationErrorsTest>("parse test 5", ParseTest5);
     append<HeapAllocationErrorsTest>("parse test 6", ParseTest6);
+    append<HeapAllocationErrorsTest>("parse test 7", ParseTest7);
 }
 
 void CommandLineParserTests::ConstructorTest1(Test& test)
@@ -104,14 +105,31 @@ void CommandLineParserTests::ParseTest6(Test& test)
 {
     CommandLineSpecification spec;
     spec.addPositionalOption(1, "command", {CommandLineSpecification::OptionType::single_value});
-    spec.addCommand("command", "command_1");
+    spec.addCommand("command", "command1");
 
     CommandLineParser parser;
     int argc = 2;
-    const char* argv[] = {"dummy", "command_1"};
+    const char* argv[] = {"dummy", "command1"};
     Configuration configuration;
     parser.parse(spec, argc, argv, configuration);
 
-    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("command").asString(), "command_1");
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("command").asString(), "command1");
+    ISHIKO_TEST_PASS();
+}
+
+void CommandLineParserTests::ParseTest7(Test& test)
+{
+    CommandLineSpecification spec;
+    spec.addPositionalOption(1, "command", {CommandLineSpecification::OptionType::single_value});
+    CommandLineSpecification::CommandDetails command_details = spec.addCommand("command", "command1");
+    command_details.addPositionalOption(1, "command1_option1", {CommandLineSpecification::OptionType::single_value});
+
+    CommandLineParser parser;
+    int argc = 2;
+    const char* argv[] = {"dummy", "command1", "value1"};
+    Configuration configuration;
+    parser.parse(spec, argc, argv, configuration);
+
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("command").asString(), "command1");
     ISHIKO_TEST_PASS();
 }
