@@ -113,7 +113,7 @@ void CommandLineParserTests::ParseTest6(Test& test)
     Configuration configuration;
     parser.parse(spec, argc, argv, configuration);
 
-    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("command").asString(), "command1");
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("command").asConfiguration().value("name").asString(), "command1");
     ISHIKO_TEST_PASS();
 }
 
@@ -121,15 +121,17 @@ void CommandLineParserTests::ParseTest7(Test& test)
 {
     CommandLineSpecification spec;
     spec.addPositionalOption(1, "command", {CommandLineSpecification::OptionType::single_value});
-    CommandLineSpecification::CommandDetails command_details = spec.addCommand("command", "command1");
-    command_details.addPositionalOption(1, "command1_option1", {CommandLineSpecification::OptionType::single_value});
+    CommandLineSpecification::CommandDetails& command_details = spec.addCommand("command", "command1");
+    command_details.addPositionalOption(2, "command1_option1", {CommandLineSpecification::OptionType::single_value});
 
     CommandLineParser parser;
-    int argc = 2;
+    int argc = 3;
     const char* argv[] = {"dummy", "command1", "value1"};
     Configuration configuration;
     parser.parse(spec, argc, argv, configuration);
 
-    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("command").asString(), "command1");
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("command").asConfiguration().value("name").asString(), "command1");
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.value("command").asConfiguration().value("command1_option1").asString(),
+        "value1");
     ISHIKO_TEST_PASS();
 }

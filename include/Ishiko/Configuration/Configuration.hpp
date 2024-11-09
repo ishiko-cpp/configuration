@@ -36,11 +36,13 @@ namespace Ishiko
             const std::string& asString() const;
             const std::vector<std::string>& asStringArray() const;
             const Configuration& asConfiguration() const;
+            Configuration& asConfiguration();
         };
 
         size_t size() const;
 
         const Value& value(const std::string& name) const;
+        Value& value(const std::string& name);
         const std::string& valueOrDefault(const std::string& name, const std::string& defaultValue) const noexcept;
         const std::vector<std::string>& valueOrDefault(const std::string& name,
             const std::vector<std::string>& defaultValue) const noexcept;

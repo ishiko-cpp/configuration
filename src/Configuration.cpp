@@ -50,12 +50,22 @@ const Configuration& Configuration::Value::asConfiguration() const
     return boost::get<Configuration>(*this);
 }
 
+Configuration& Configuration::Value::asConfiguration()
+{
+    return boost::get<Configuration>(*this);
+}
+
 size_t Configuration::size() const
 {
     return m_options.size();
 }
 
 const Configuration::Value& Configuration::value(const std::string& name) const
+{
+    return m_options.at(name);
+}
+
+Configuration::Value& Configuration::value(const std::string& name)
 {
     return m_options.at(name);
 }

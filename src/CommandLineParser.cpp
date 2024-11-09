@@ -9,6 +9,9 @@ using namespace Ishiko;
 void CommandLineParser::parse(const CommandLineSpecification& specification, int argc, const char* argv[],
     Configuration& configuration)
 {
+    CommandLineSpecification::CommandDetails command_details;
+    Configuration* current_configuration = &configuration;
+
     // The first argument is the executable so we ignore it
     size_t positional_option = 0;
     for (int i = 1; i < argc; ++i)
@@ -28,14 +31,12 @@ void CommandLineParser::parse(const CommandLineSpecification& specification, int
                 option_name = CString::Substring(arg, 2, pos);
                 // TODO: what if value is empty, maybe that is valid?
                 option_value = CString::Substring(arg, pos + 1);
-                configuration.set(option_name, option_value);
             }
             else
             {
                 option_name = CString::Substring(arg, 2);
                 // TODO: use spec to find value to assign
                 option_value = "";
-                configuration.set(option_name, option_value);
             }
         }
         else if (CString::StartsWith(arg, "-"))
@@ -60,7 +61,6 @@ void CommandLineParser::parse(const CommandLineSpecification& specification, int
             if (specification.findShortNamedOption(short_name, option_name, details))
             {
                 // TODO: what if value is empty, maybe that is valid?
-                configuration.set(option_name, option_value);
             }
         }
         else
@@ -68,12 +68,22 @@ void CommandLineParser::parse(const CommandLineSpecification& specification, int
             ++positional_option;
             
             CommandLineSpecification::OptionDetails details;
-            if (specification.findPositionalOption(positional_option, option_name, details))
+            if (command_details.findPositionalOption(positional_option, option_name, details))
             {
                 if (details.isValueAllowed(arg))
                 {
                     option_value = arg;
-                    configuration.set(option_name, arg);
+                }
+                else
+                {
+                    // TODO: error
+                }
+            }
+            else if (specification.findPositionalOption(positional_option, option_name, details))
+            {
+                if (details.isValueAllowed(arg))
+                {
+                    option_value = arg;
                 }
                 else
                 {
@@ -85,10 +95,17 @@ void CommandLineParser::parse(const CommandLineSpecification& specification, int
                 // TODO
             }
         }
-        CommandLineSpecification::CommandDetails command_details;
+
         if (specification.findCommand(option_name, option_value, command_details))
         {
-            // TODO
+            Configuration command_configuration;
+            command_configuration.set("name", option_value);
+            current_configuration->set(option_name, command_configuration);
+            current_configuration = &current_configuration->value(option_name).asConfiguration();
+        }
+        else
+        {
+            current_configuration->set(option_name, option_value);
         }
     }
 }
