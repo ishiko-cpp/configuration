@@ -24,6 +24,7 @@ ConfigurationTests::ConfigurationTests(const TestNumber& number, const TestConte
     append<HeapAllocationErrorsTest>("valueOrDefault test 1", ValueOrDefaultTest1);
     append<HeapAllocationErrorsTest>("valueOrDefault test 2", ValueOrDefaultTest2);
     append<HeapAllocationErrorsTest>("valueOrDefault test 3", ValueOrDefaultTest3);
+    append<HeapAllocationErrorsTest>("valueOrDefault test 4", ValueOrDefaultTest4);
     append<HeapAllocationErrorsTest>("valueOrNull test 1", ValueOrNullTest1);
 }
 
@@ -161,6 +162,19 @@ void ConfigurationTests::ValueOrDefaultTest1(Test& test)
 {
     Configuration configuration;
 
+    const char* default_value = "default";
+    configuration.set("option1", "value1");
+
+    ISHIKO_TEST_FAIL_IF_NEQ(configuration.size(), 1);
+    ISHIKO_TEST_FAIL_IF_STR_NEQ(configuration.valueOrDefault("option1", default_value), "value1");
+    ISHIKO_TEST_FAIL_IF_STR_NEQ(configuration.valueOrDefault("option2", default_value), "default");
+    ISHIKO_TEST_PASS();
+}
+
+void ConfigurationTests::ValueOrDefaultTest2(Test& test)
+{
+    Configuration configuration;
+
     const std::string defaultValue = "default";
     configuration.set("option1", "value1");
 
@@ -170,7 +184,7 @@ void ConfigurationTests::ValueOrDefaultTest1(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void ConfigurationTests::ValueOrDefaultTest2(Test& test)
+void ConfigurationTests::ValueOrDefaultTest3(Test& test)
 {
     Configuration configuration;
 
@@ -185,7 +199,7 @@ void ConfigurationTests::ValueOrDefaultTest2(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void ConfigurationTests::ValueOrDefaultTest3(Test& test)
+void ConfigurationTests::ValueOrDefaultTest4(Test& test)
 {
     Configuration configuration;
 

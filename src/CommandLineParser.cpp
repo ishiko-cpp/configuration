@@ -9,11 +9,16 @@ using namespace Ishiko;
 void CommandLineParser::parse(const CommandLineSpecification& specification, int argc, const char* argv[],
     Configuration& configuration)
 {
+    CommandLineSpecification::CommandDetails command_details;
+    Configuration* current_configuration = &configuration;
+
     // The first argument is the executable so we ignore it
     size_t positional_option = 0;
     for (int i = 1; i < argc; ++i)
     {
         const char* arg = argv[i];
+        std::string option_name;
+        std::string option_value;
         if (CString::StartsWith(arg, "--"))
         {
             size_t pos = CString::Find(arg, "=");
@@ -23,19 +28,20 @@ void CommandLineParser::parse(const CommandLineSpecification& specification, int
                 {
                     // TODO: error
                 }
+                option_name = CString::Substring(arg, 2, pos);
                 // TODO: what if value is empty, maybe that is valid?
-                configuration.set(CString::Substring(arg, 2, pos), CString::Substring(arg, pos + 1));
+                option_value = CString::Substring(arg, pos + 1);
             }
             else
             {
+                option_name = CString::Substring(arg, 2);
                 // TODO: use spec to find value to assign
-                configuration.set(CString::Substring(arg, 2), "");
+                option_value = "";
             }
         }
         else if (CString::StartsWith(arg, "-"))
         {
             std::string short_name;
-            std::string value;
             size_t pos = CString::Find(arg, "=");
             if (pos != std::string::npos)
             {
@@ -44,31 +50,40 @@ void CommandLineParser::parse(const CommandLineSpecification& specification, int
                     // TODO: error
                 }
                 short_name = CString::Substring(arg, 1, pos);
-                value = CString::Substring(arg, pos + 1);
+                option_value = CString::Substring(arg, pos + 1);
             }
             else
             {
                 short_name = CString::Substring(arg, 1);
+                option_value = "";
             }
-            std::string name;
             CommandLineSpecification::OptionDetails details;
-            if (specification.findShortNamedOption(short_name, name, details))
+            if (specification.findShortNamedOption(short_name, option_name, details))
             {
                 // TODO: what if value is empty, maybe that is valid?
-                configuration.set(name, value);
             }
         }
         else
         {
             ++positional_option;
             
-            std::string name;
             CommandLineSpecification::OptionDetails details;
-            if (specification.findPositionalOption(positional_option, name, details))
+            if (command_details.findPositionalOption(positional_option, option_name, details))
             {
                 if (details.isValueAllowed(arg))
                 {
-                    configuration.set(name, arg);
+                    option_value = arg;
+                }
+                else
+                {
+                    // TODO: error
+                }
+            }
+            else if (specification.findPositionalOption(positional_option, option_name, details))
+            {
+                if (details.isValueAllowed(arg))
+                {
+                    option_value = arg;
                 }
                 else
                 {
@@ -79,6 +94,28 @@ void CommandLineParser::parse(const CommandLineSpecification& specification, int
             {
                 // TODO
             }
+        }
+
+        CommandLineSpecification::CommandDetails new_command_details;
+        if (command_details.findCommand(option_name, option_value, new_command_details))
+        {
+            Configuration command_configuration;
+            command_configuration.set("name", option_value);
+            current_configuration->set(option_name, command_configuration);
+            current_configuration = &current_configuration->value(option_name).asConfiguration();
+            command_details = new_command_details;
+        }
+        else if (specification.findCommand(option_name, option_value, new_command_details))
+        {
+            Configuration command_configuration;
+            command_configuration.set("name", option_value);
+            current_configuration->set(option_name, command_configuration);
+            current_configuration = &current_configuration->value(option_name).asConfiguration();
+            command_details = new_command_details;
+        }
+        else
+        {
+            current_configuration->set(option_name, option_value);
         }
     }
 }
